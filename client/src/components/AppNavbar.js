@@ -15,6 +15,9 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import Divider from '@material-ui/core/Divider';
 import { blue } from '@material-ui/core/colors';
 import logo from '../assets/wsb_logo.png'
+import TextField from '@material-ui/core/TextField';
+import SearchIcon from '@material-ui/icons/Search';
+import InputBase from '@material-ui/core/InputBase';
 
 const useStyles = makeStyles(theme => ({
   root: {
