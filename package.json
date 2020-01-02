@@ -1,0 +1,28 @@
+{
+  "name": "wallstreetbets",
+  "version": "1.0.0",
+  "engines": {
+    "node": "10.15.3"
+  },
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "author": "Ryan Floyd",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.0.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
