@@ -1,60 +1,58 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import Divider from '@material-ui/core/Divider';
-import { blue } from '@material-ui/core/colors';
-import logo from '../assets/wsb_logo.png'
-import TextField from '@material-ui/core/TextField';
-import SearchIcon from '@material-ui/icons/Search';
-import InputBase from '@material-ui/core/InputBase';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import Divider from "@material-ui/core/Divider";
+import logo from "../assets/wsb_logo.png";
+import Logout from "./Logout";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-  }, 
+    flexGrow: 1
+  },
   menuButton: {
-    marginLeft: theme.spacing(2),
+    marginLeft: theme.spacing(2)
   },
   title: {
-    flexGrow: 1,
-
+    flexGrow: 1
   },
   list: {
-    width: 250,
+    width: 250
   },
   fullList: {
-    width: 'auto',
+    width: "auto"
   },
   navBar: {
-    background: 'green',
+    background: "green"
   }
 }));
 
 export default function AppNavBar() {
   const classes = useStyles();
   const [state, setState] = React.useState({
-    open: false,
+    open: false
   });
 
   const toggleDrawer = (side, open) => event => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
 
     setState({ ...state, [side]: open });
   };
-
 
   const sideList = side => (
     <div
@@ -64,18 +62,20 @@ export default function AppNavBar() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        {['Inbox', 'Account', 'Contact'].map((text, index) => (
+        {["Inbox", "Account", "Contact"].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon/>
+            <ListItemIcon />
             <ListItemText primary={text} />
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {["All mail", "Trash", "Spam"].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon><InboxIcon /></ListItemIcon>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -92,15 +92,23 @@ export default function AppNavBar() {
             Wall Street Bets
           </Typography>
           <Button color="inherit">Login</Button>
-          <IconButton edge="end" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon onClick={toggleDrawer('open', true)}/>
-          </IconButton>
+          <Logout />
+          <IconButton
+            edge="end"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          ></IconButton>
+          <MenuIcon onClick={toggleDrawer("open", true)} />
         </Toolbar>
       </AppBar>
-      <Drawer anchor="right" open={state.open} onClose={toggleDrawer('open', false)}>
-        {sideList('right')}
+      <Drawer
+        anchor="right"
+        open={state.open}
+        onClose={toggleDrawer("open", false)}
+      >
+        {sideList("right")}
       </Drawer>
     </div>
   );
 }
-
