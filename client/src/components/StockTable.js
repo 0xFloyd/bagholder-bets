@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { getStocks, deleteStock } from '../actions/stockActions';
+import Container from '@material-ui/core/Container';
 import PropTypes from 'prop-types';
 
 class StockTable extends Component {
@@ -31,7 +32,7 @@ class StockTable extends Component {
     // this grabs stocks option from state
     const { stocks } = this.props.stock;
     return (
-      <div className="stockTableContainer">
+      <Container>
         <TableContainer component={Paper}>
           <Table aria-label="simple table">
             <TableHead>
@@ -62,7 +63,7 @@ class StockTable extends Component {
             </TableBody>
           </Table>
         </TableContainer>
-      </div>
+      </Container>
     );
 }
 }

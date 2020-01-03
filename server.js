@@ -1,21 +1,23 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const path = require('path');
-const user = require('./api/user');
-const stocks = require('./api/stocks');
+const config = require('config');
 
 const app = express(); 
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 // get mongoDB login & connect
-const db = require('./config/keys').mongoURI;
-mongoose.connect(db).then(() => console.log("mongoDBconnected")).catch(err => console.log(err));
+const db = config.get('mongoURI');
+mongoose.connect(db, {
+    useNewUrlParser: true,
+    useCreateIndex: true})
+    .then(() => console.log("mongoDBconnected")).catch(err => console.log(err));
 
 // Middleware
-app.use('/api/user', user);
-app.use('/api/stocks', stocks);
+app.use('/api/user', require('./api/user'));
+app.use('/api/stocks', require('./api/stocks'));
+app.use('/api/authorize', require('./api/authorize'));
 
 // serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

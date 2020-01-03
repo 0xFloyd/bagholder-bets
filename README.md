@@ -245,3 +245,77 @@ if (process.env.NODE_ENV === 'production') {
 ```
 ### 13. Log in to heroku on command line with heroku login
 then, heroku create 
+
+had to eliminate redux dev tools for production 
+
+# User Auth 
+### 1. Create user model, then create route to register user 
+```javascript
+app.use('/api/user', require('./api/user'));
+app.use('/api/stocks', require('./api/stocks'));
+```
+
+side note, dont need body-parser anymore. it's included in express 
+
+### 2. Implementing Json web tokens 
+npm i jsonwebtoken
+npm i config (for hiding env variables)
+
+in config folder, create "Default.json" file for storing env variables 
+`const config = require('config');`
+`const db = config.get('mongoURI');`
+
+Now, we have to sign tokens when response is sent back from server. user.id will be in json web token so we can access it 
+
+```javascript 
+...
+newUser.save()
+.then(user => {
+  // sign jwt web token 
+  jwt.sign({
+      id: user.id,
+      name: user.name
+  },config.get('jwtSecret'),
+  { expiresIn: 3600 },
+  (err, token) => {
+      if(err) throw err;
+      res.json({
+          token: token,
+          user: {
+              id: user.id,
+              name: user.name,
+              email: user.email
+          }
+      })
+  }
+  )
+});
+```
+
+Now, whether user registers or signs in, response from the server will be the same. token and then user object 
+
+### 3. Middleware for auth 
+Create middleware folder in root, with authorize.js file 
+create authorize function thast checks request header for token. If no token , send back 401 status (unauthorized)
+
+### 4. To protect any route and make sure user is logged in
+`const authorize = require('../middleware/authorize');`
+
+then put authorize as second argument in any api request
+
+### 5. Create route in authorize.js to check/ get current user
+This gets current users information by using the token.
+We need to do this because jwt authentication is stateless. There are no sessions, and no data is stored in memory.
+So we need to constantly valdiate that the user is logged in. So we need a route that takes the token and returns the user data    
+
+```javascript
+// returns user
+router.get('/user', authorize, (req, res) => {
+    User.findById(req.user.id)
+    .select('-password')    //ignores password and doesnt return it
+    .then(user => res.json(user));
+})
+```
+
+
+# Implementing authorization into Redux 

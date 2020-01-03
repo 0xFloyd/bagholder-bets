@@ -3,13 +3,14 @@ var mongoose = require("mongoose");
 //const bcrypt = require("bcrypt");
 //const jwt = require("jsonwebtoken");
 
-const userSchema = new mongoose.Schema({
+
+const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     trim: true
   },
 
-  data: {
+  date: {
     type: Date,
     default: Date.now
   },
@@ -22,11 +23,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     lowercase: true,
-    validate: value => {
-      if (!validator.isEmail(value)) {
-        throw new Error({ error: 'Invalid email address'})
-      }
-    }
+    unique: true
   },
 
   password: {
@@ -84,6 +81,6 @@ userSchema.pre("remove", function(next) {
 });
 */
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("user", UserSchema);
 
 module.exports = User;

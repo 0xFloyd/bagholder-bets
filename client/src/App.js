@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 import AppNavBar from './components/AppNavbar'
 import StockTable from './components/StockTable';
 import StockWatchList from './components/StockWatchList';
@@ -18,12 +19,14 @@ function App() {
         <AppNavBar></AppNavBar>
         <br></br>
         <div className="appBody">
-          <StockTable/>
-          <Typography variant="body1" gutterBottom></Typography>
-          <br></br>
-          <StockWatchList/>
-          <br></br>
-          <StockModal/>
+          <Grid container>
+            <Grid item xs={12}>
+              <StockTable/>
+            </Grid>
+            <Grid item xs={12}>
+              <StockModal/>
+            </Grid>
+          </Grid> 
         </div>
       </div>
     </Provider>
