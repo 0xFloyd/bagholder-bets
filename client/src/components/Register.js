@@ -20,7 +20,7 @@ import { Route, Redirect } from "react-router-dom";
 
 const styles = theme => ({
   root: {
-    height: "90vh"
+    height: "100vh"
   },
   image: {
     backgroundImage: "url(https://source.unsplash.com/random)",
