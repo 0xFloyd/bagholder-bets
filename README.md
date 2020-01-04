@@ -535,3 +535,18 @@ export const register = ({ name, email, password }) => dispatch => {
     });
 };
 ```
+
+# Login
+
+### 1 Create login component
+
+### 2 create login action
+
+### 3 change type to "LOGIN_FAIL" instead of REGISTER FAIL
+
+### 4 check if user is logged in, and render navbar based on user status
+
+# Be able to add stocks if user logged in
+
+`.post("/api/stocks", stock, tokenConfig(getState))`
+tokenConfig(getState) just attaches jwt token to header on request

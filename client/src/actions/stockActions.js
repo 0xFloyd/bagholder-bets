@@ -1,56 +1,75 @@
-//actions are where we actually make request to backend 
-import axios from 'axios'
-import { GET_STOCKS, ADD_STOCK, DELETE_STOCK, STOCKS_LOADING } from './types';
+//actions are where we actually make request to backend
+import axios from "axios";
+import { GET_STOCKS, ADD_STOCK, DELETE_STOCK, STOCKS_LOADING } from "./types";
+import { tokenConfig } from "./authActions";
+import { returnErrors } from "./errorActions";
 
-// the return is where we're implementing the action.type that's seen in the reducer. 
-// type is how you identify the action 
+// the return is where we're implementing the action.type that's seen in the reducer.
+// type is how you identify the action
 
-// we call these actions from within the component 
+// we call these actions from within the component
 export const getStocks = () => dispatch => {
-    dispatch(setStocksLoading());
-    axios
-        .get('/api/stocks')
-        .then(res => dispatch({
-            type: GET_STOCKS,
-            payload: res.data
-        }))
-    
-    return {
-        type: GET_STOCKS
-    }
-}
+  dispatch(setStocksLoading());
+  axios
+    .get("/api/stocks")
+    .then(res =>
+      dispatch({
+        type: GET_STOCKS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 
+  return {
+    type: GET_STOCKS
+  };
+};
 
 // stock passed in from submit
-export const addStock = (stock) => (dispatch) => {
-    axios.post('/api/stocks', stock)
-    .then(res => dispatch({
+// You can include getState as a second argument in dispatch to get the current state
+export const addStock = stock => (dispatch, getState) => {
+  axios
+    .post("/api/stocks", stock, tokenConfig(getState))
+    .then(res =>
+      dispatch({
         type: ADD_STOCK,
         payload: res.data
-    }))
-    
-    return {
-        type: ADD_STOCK,
-        payload: stock
-    }
-}
+      })
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
 
+  return {
+    type: ADD_STOCK,
+    payload: stock
+  };
+};
 
-// return returns to reducer 
-export const deleteStock = (id) => dispatch => {
-    axios.delete(`/api/stocks/${id}`)
-    .then(res => dispatch({
+// return returns to reducer
+export const deleteStock = id => (dispatch, getState) => {
+  axios
+    .delete(`/api/stocks/${id}`, tokenConfig(getState))
+    .then(res =>
+      dispatch({
         type: DELETE_STOCK,
         payload: id
-    }))
-    return {
-        type: DELETE_STOCK,
-        payload: id
-    }
-}
+      })
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+
+  return {
+    type: DELETE_STOCK,
+    payload: id
+  };
+};
 
 export const setStocksLoading = () => {
-    return {
-        type: STOCKS_LOADING
-    }
-}
+  return {
+    type: STOCKS_LOADING
+  };
+};

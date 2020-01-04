@@ -13,7 +13,7 @@ import green from "@material-ui/core/colors/green";
 import logo from "../assets/wsb_logo.png";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { login } from "../actions/authActions";
+import { register } from "../actions/authActions";
 import { clearErrors } from "../actions/errorActions";
 import { Alert } from "react-bootstrap";
 
@@ -55,7 +55,7 @@ const styles = theme => ({
   }
 });
 
-class Login extends Component {
+class Register extends Component {
   state = {
     name: "",
     email: "",
@@ -67,7 +67,7 @@ class Login extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
-    login: PropTypes.func.isRequired,
+    register: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
   };
 
@@ -77,7 +77,7 @@ class Login extends Component {
     const { error } = this.props;
     if (error !== prevProps.error) {
       // check for register error
-      if (error.id === "LOGIN_FAIL") {
+      if (error.id === "REGISTER_FAIL") {
         // if you inspect with redux tools, message is embedded in message
         this.setState({ msg: error.msg.msg });
       } else {
@@ -99,15 +99,18 @@ class Login extends Component {
     this.props.clearErrors();
     e.preventDefault();
 
-    const { email, password } = this.state;
+    const { name, email, password } = this.state;
 
-    const userLogin = {
+    // Create user object
+
+    const newUser = {
+      name: name,
       email: email,
       password: password
     };
 
-    // Try to log in user
-    this.props.login(userLogin);
+    //attempt to register new user
+    this.props.register(newUser);
   };
 
   render() {
@@ -120,12 +123,23 @@ class Login extends Component {
           <div className={classes.paper}>
             <img src={logo} alt="wsb logo" className="wsbLoginLogo"></img>
             <Typography component="h1" variant="h5">
-              Sign in
+              Register
             </Typography>
             {this.state.msg ? (
               <Alert variant="danger">{this.state.msg}</Alert>
             ) : null}
             <form className={classes.form} onSubmit={this.onSubmit} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="name"
+                label="Name"
+                name="name"
+                autoFocus
+                onChange={this.onChange}
+              />
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -157,7 +171,7 @@ class Login extends Component {
                 variant="contained"
                 className={classes.submit}
               >
-                Login
+                Sign Up
               </Button>
               <Grid container>
                 <Grid item xs>
@@ -167,7 +181,7 @@ class Login extends Component {
                 </Grid>
                 <Grid item>
                   <Link href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                    {"Already have an account? Log In"}
                   </Link>
                 </Grid>
               </Grid>
@@ -184,6 +198,6 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(mapStateToProps, { login, clearErrors })(
-  withStyles(styles)(Login)
+export default connect(mapStateToProps, { register, clearErrors })(
+  withStyles(styles)(Register)
 );
