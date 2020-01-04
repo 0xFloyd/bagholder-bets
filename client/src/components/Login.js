@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 import { login } from "../actions/authActions";
 import { clearErrors } from "../actions/errorActions";
 import { Alert } from "react-bootstrap";
+import { Route, Redirect } from "react-router-dom";
 
 const styles = theme => ({
   root: {
@@ -111,7 +112,10 @@ class Login extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    if (this.props.isAuthenticated === true) {
+      return <Redirect to="/" />;
+    }
+    const { classes, isAuthenticated } = this.props;
     return (
       <Grid container component="main" className={classes.root}>
         <CssBaseline />

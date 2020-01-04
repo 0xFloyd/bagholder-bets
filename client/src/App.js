@@ -22,7 +22,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="App">
-          <Main></Main>
+          <Main />
         </div>
       </Provider>
     );

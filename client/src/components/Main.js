@@ -2,6 +2,13 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import NavBar from "./NavBar";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Login from "./Login";
+import Register from "./Register";
+import NotFound from "./NotFound";
+import ProtectedRoute from "./ProtectedRoute";
+import UnprotectedRoute from "./UnprotectedRoute";
+import Home from "./Home";
 
 class Main extends Component {
   state = {
@@ -23,7 +30,19 @@ class Main extends Component {
 
     return (
       <div>
-        <NavBar></NavBar>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <ProtectedRoute
+              exact
+              path="/"
+              isAuthenticated={isAuthenticated}
+              component={Home}
+            ></ProtectedRoute>
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }
