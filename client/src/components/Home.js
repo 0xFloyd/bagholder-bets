@@ -3,6 +3,7 @@ import StockTable from "./StockTable";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import NavBar from "./NavBar";
+import Search from "./Search";
 
 class Home extends Component {
   state = {
@@ -14,20 +15,21 @@ class Home extends Component {
   };
 
   static propTypes = {
-    auth: PropTypes.object.isRequired,
+    auth: PropTypes.object,
     isAuthenticated: PropTypes.bool,
-    error: PropTypes.object.isRequired,
-    register: PropTypes.func.isRequired,
-    clearErrors: PropTypes.func.isRequired
+    error: PropTypes.object,
+    register: PropTypes.func,
+    clearErrors: PropTypes.func
   };
 
   render() {
     // this includes all the state values
-    const { isAuthenticated, user } = this.props.auth;
+    // const { isAuthenticated, user } = this.props.auth;
 
     return (
       <div>
         <NavBar />
+        <Search />
         <StockTable />
       </div>
     );

@@ -15,11 +15,11 @@ class NavBar extends Component {
   };
 
   static propTypes = {
-    auth: PropTypes.object.isRequired,
+    auth: PropTypes.object,
     isAuthenticated: PropTypes.bool,
-    error: PropTypes.object.isRequired,
-    register: PropTypes.func.isRequired,
-    clearErrors: PropTypes.func.isRequired
+    error: PropTypes.object,
+    register: PropTypes.func,
+    clearErrors: PropTypes.func
   };
 
   render() {
@@ -36,9 +36,7 @@ class NavBar extends Component {
           </Nav.Link>
         </Nav>
         <Nav>
-          <Nav.Link href="#logout">
-            <Logout />
-          </Nav.Link>
+          <Logout />
         </Nav>
       </Fragment>
     );

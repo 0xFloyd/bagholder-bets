@@ -3,7 +3,6 @@ var mongoose = require("mongoose");
 //const bcrypt = require("bcrypt");
 //const jwt = require("jsonwebtoken");
 
-
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -15,9 +14,16 @@ const UserSchema = new mongoose.Schema({
     default: Date.now
   },
 
-  stocks: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: "Stock" 
+  stocks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Stock"
+    }
+  ],
+
+  balance: {
+    type: Number,
+    default: 100000
   },
 
   email: {
@@ -30,14 +36,15 @@ const UserSchema = new mongoose.Schema({
     type: String
   },
 
-  tokens: [{
-    token: {
-      type: String,
-      required: true
+  tokens: [
+    {
+      token: {
+        type: String,
+        required: true
+      }
     }
-  }]
+  ]
 });
-
 
 /*
 userSchema.pre("save", async function(next) {
