@@ -550,3 +550,5 @@ export const register = ({ name, email, password }) => dispatch => {
 
 `.post("/api/stocks", stock, tokenConfig(getState))`
 tokenConfig(getState) just attaches jwt token to header on request
+
+ browser router basically gives access to the history API and keeps the UI in sync with the URL now we need to wrap our app component with browser router let's go 
