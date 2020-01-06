@@ -25,7 +25,7 @@ body {
 }
 
 .wsbLoginLogo {
-  width: 20% !important;
+  width: 70% !important;
   border-radius: 50px;
 }
 
@@ -70,11 +70,20 @@ body {
   .wsbLogo {
     width: 3% !important;
   }
+  .wsbLoginLogo {
+    width: 20% !important;
+    border-radius: 50px;
+  }
 }
 
 /*  Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .wsbLogo {
     width: 3% !important;
+  }
+
+  .wsbLoginLogo {
+    width: 20% !important;
+    border-radius: 50px;
   }
 }

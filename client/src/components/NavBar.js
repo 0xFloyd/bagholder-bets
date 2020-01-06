@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Logout from "./Logout";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import logo from "../assets/wsb_logo.png";
 
 class NavBar extends Component {
   state = {
