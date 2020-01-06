@@ -12,9 +12,15 @@ class Logout extends Component {
   render() {
     return (
       <Fragment>
-        <Nav.Link onClick={this.props.logout} href="#">
-          Logout
-        </Nav.Link>
+        <Nav>
+          <Nav.Link
+            className="navbar-text"
+            onClick={this.props.logout}
+            href="#"
+          >
+            Logout
+          </Nav.Link>
+        </Nav>
       </Fragment>
     );
   }

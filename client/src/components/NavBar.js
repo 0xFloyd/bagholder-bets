@@ -35,9 +35,7 @@ class NavBar extends Component {
             </span>
           </Nav.Link>
         </Nav>
-        <Nav>
-          <Logout />
-        </Nav>
+        <Logout />
       </Fragment>
     );
 
@@ -54,7 +52,12 @@ class NavBar extends Component {
 
     return (
       <div>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar
+          collapseOnSelect
+          expand="lg"
+          variant="dark"
+          className="mainSiteNavBar"
+        >
           <Navbar.Brand href="#home">Wall Street Bets</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">

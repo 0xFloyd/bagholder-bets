@@ -1,6 +1,12 @@
 //actions are where we actually make request to backend
 import axios from "axios";
-import { GET_STOCKS, ADD_STOCK, DELETE_STOCK, STOCKS_LOADING } from "./types";
+import {
+  GET_STOCKS,
+  ADD_STOCK,
+  DELETE_STOCK,
+  STOCKS_LOADING,
+  SEARCH_STOCK
+} from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
 
@@ -44,6 +50,25 @@ export const addStock = stock => (dispatch, getState) => {
 
   return {
     type: ADD_STOCK,
+    payload: stock
+  };
+};
+
+export const searchStock = stock => (dispatch, getState) => {
+  axios
+    .post("/api/iex", tokenConfig(getState))
+    .then(res =>
+      dispatch({
+        type: SEARCH_STOCK,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+
+  return {
+    type: SEARCH_STOCK,
     payload: stock
   };
 };

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { login } from "../actions/authActions";
 import { clearErrors } from "../actions/errorActions";
-import { Alert, Form, Container, Button, Nav } from "react-bootstrap";
+import { Alert, Form, Container, Button, Nav, Row, Col } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 
 class Login extends Component {
@@ -26,7 +26,11 @@ class Login extends Component {
   // Lifecylce method for when component updates. takes in previous props as arg
   componentDidUpdate(prevProps) {
     // we have access to this in props, you can see in redux tools
-    const { error } = this.props;
+    const { error, isAuthenticated } = this.props;
+    if (prevProps.isAuthenticated || isAuthenticated) {
+      this.props.history.push("/");
+    }
+
     if (error !== prevProps.error) {
       // check for register error
       if (error.id === "LOGIN_FAIL") {
@@ -60,45 +64,62 @@ class Login extends Component {
 
     // Try to log in user
     this.props.login(userLogin);
+
+    if (this.props.isAuthenticated === true) {
+      return <Redirect to="/" />;
+    }
   };
 
   render() {
-    /*
-    if (this.props.isAuthenticated === true) {
-      return <Redirect to="/" />;
-    }*/
-
     return (
       <Container>
-        <img src={logo} alt="wsb logo" className="wsbLoginLogo"></img>
-        <h1>Sign in</h1>
+        <Row className="justify-content-center">
+          <img src={logo} alt="wsb logo" className="wsbLoginLogo"></img>
+        </Row>
+        <Row className="justify-content-center mt-4">
+          <h1>Sign in</h1>
+        </Row>
         {this.state.msg ? (
           <Alert variant="danger">{this.state.msg}</Alert>
         ) : null}
-        <form onSubmit={this.onSubmit}>
-          <Form.Control
-            id="email"
-            label="Email Address"
-            name="email"
-            onChange={this.onChange}
-          />
-          <Form.Control
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            onChange={this.onChange}
-          />
-          <Button type="submit">Login</Button>
-
+        <Row className="justify-content-center mt-3">
+          <form onSubmit={this.onSubmit}>
+            <Form.Group>
+              <Form.Label className="mb-0">Email Address</Form.Label>
+              <Form.Control
+                className="mt-0"
+                id="email"
+                label="Email Address"
+                name="email"
+                onChange={this.onChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label className="mb-0">Password</Form.Label>
+              <Form.Control
+                className="mt-0"
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                onChange={this.onChange}
+              />
+            </Form.Group>
+            <Button className="loginSplashButton" type="submit">
+              Login
+            </Button>
+          </form>
+        </Row>
+        <Row className="justify-content-center mt-4">
           <Nav.Link href="#" variant="body2">
             Forgot password?
           </Nav.Link>
-
+        </Row>
+        <Row className="justify-content-center">
           <Nav.Link href="register">
             {"Don't have an account? Sign Up"}
           </Nav.Link>
-        </form>
+        </Row>
       </Container>
     );
   }

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { register } from "../actions/authActions";
 import { clearErrors } from "../actions/errorActions";
-import { Alert, Form, Container, Button, Nav } from "react-bootstrap";
+import { Alert, Form, Container, Button, Nav, Row, Col } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 
 class Register extends Component {
@@ -72,41 +72,61 @@ class Register extends Component {
     const { classes } = this.props;
     return (
       <Container>
-        <img src={logo} alt="wsb logo" className="wsbLoginLogo"></img>
-        <h1>Sign in</h1>
+        <Row className="justify-content-center">
+          <img src={logo} alt="wsb logo" className="wsbLoginLogo"></img>
+        </Row>
+        <Row className="justify-content-center mt-4">
+          <h1>Sign in</h1>
+        </Row>
         {this.state.msg ? (
           <Alert variant="danger">{this.state.msg}</Alert>
         ) : null}
-        <form onSubmit={this.onSubmit}>
-          <Form.Control
-            id="name"
-            label="name"
-            name="name"
-            onChange={this.onChange}
-          />
-          <Form.Control
-            id="email"
-            label="Email Address"
-            name="email"
-            onChange={this.onChange}
-          />
-          <Form.Control
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            onChange={this.onChange}
-          />
-          <Button type="submit">Login</Button>
-
+        <Row className="justify-content-center mt-3">
+          <form onSubmit={this.onSubmit}>
+            <Form.Group>
+              <Form.Label className="mb-0">Username</Form.Label>
+              <Form.Control
+                className="mt-0"
+                id="name"
+                label="name"
+                name="name"
+                onChange={this.onChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label className="mb-0">Email Address</Form.Label>
+              <Form.Control
+                className="mt-0"
+                id="email"
+                label="Email Address"
+                name="email"
+                onChange={this.onChange}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label className="mb-0">Password</Form.Label>
+              <Form.Control
+                className="mt-0"
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                onChange={this.onChange}
+              />
+            </Form.Group>
+            <Button className="" type="submit">
+              Login
+            </Button>
+          </form>
+        </Row>
+        <Row className="justify-content-center mt-4">
           <Nav.Link href="#" variant="body2">
             Forgot password?
           </Nav.Link>
-
-          <Nav.Link href="register">
-            {"Don't have an account? Sign Up"}
-          </Nav.Link>
-        </form>
+        </Row>
+        <Row className="justify-content-center">
+          <Nav.Link href="login">{"Already have an account? Log In"}</Nav.Link>
+        </Row>
       </Container>
     );
   }

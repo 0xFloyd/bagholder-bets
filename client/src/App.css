@@ -30,15 +30,25 @@ body {
 }
 
 .stock-search-button {
-  border-radius: 3px;
-  background-color: rgb(76, 175, 80);
-  border: 0px solid rgb(76, 175, 80);
+  border-radius: 4px;
+  background-color: green;
+  border: 0px solid green;
 }
 
 .stock-search-button:hover {
   border-radius: 3px;
   background-color: rgb(113, 199, 116);
   border: 0px solid rgb(76, 175, 80);
+}
+
+.mainSiteNavBar {
+  background-color: green;
+  color: white;
+}
+
+.no-spacing {
+  margin: 0;
+  padding: 0;
 }
 
 /* // Extra small devices (portrait phones, less than 576px) */

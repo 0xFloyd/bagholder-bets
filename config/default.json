@@ -1,4 +1,6 @@
 {
-    "mongoURI": "mongodb+srv://ryanfloyd:ryanwallstreetbet@cluster0-wmzbv.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret": "ryanWSBjwt_secret"
+  "mongoURI": "mongodb+srv://ryanfloyd:ryanwallstreetbet@cluster0-wmzbv.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "ryanWSBjwt_secret",
+  "iexToken": "pk_764a7652cfde425785b349da624c23ac",
+  "testToken": "Tpk_d037c25417bf4c24b8285868c8174054"
 }
