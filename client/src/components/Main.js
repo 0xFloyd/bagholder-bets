@@ -7,6 +7,7 @@ import Register from "./Register";
 import NotFound from "./NotFound";
 import ProtectedRoute from "./ProtectedRoute";
 import Home from "./Home";
+import Spinner from "./Spinner";
 
 /*
 class DebugRouter extends BrowserRouter {
@@ -39,6 +40,12 @@ class Main extends Component {
     clearErrors: PropTypes.func
   };
 
+  async componentDidMount() {
+    console.log("Main async componentDidMount");
+    await this.props;
+    console.log("Main async componentDidMount done");
+  }
+
   render() {
     // this includes all the state values
     console.log("main.js console log:", this.props);
@@ -46,18 +53,22 @@ class Main extends Component {
 
     return (
       <div>
-        <BrowserRouter>
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <ProtectedRoute
-              path="/"
-              isAuthenticated={isAuthenticated}
-              component={Home}
-            ></ProtectedRoute>
-            <Route path="*" component={NotFound} />
-          </Switch>
-        </BrowserRouter>
+        {isAuthenticated !== null ? (
+          <BrowserRouter>
+            <Switch>
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <ProtectedRoute
+                path="/"
+                isAuthenticated={isAuthenticated}
+                component={Home}
+              ></ProtectedRoute>
+              <Route path="*" component={NotFound} />
+            </Switch>
+          </BrowserRouter>
+        ) : (
+          <Spinner className="fullscreenSpinner"></Spinner>
+        )}
       </div>
     );
   }

@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 class App extends Component {
-  //load User from redux when app loads
   render() {
     return (
       <Provider store={store}>

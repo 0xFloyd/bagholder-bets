@@ -9,7 +9,8 @@ export default class Search extends Component {
     percentChange: "",
     ytdChange: "",
     high: "",
-    low: ""
+    low: "",
+    quantity: ""
   };
 
   onChange = e => {
@@ -54,6 +55,16 @@ export default class Search extends Component {
     console.log("clicked");
     this.setState({ stock: "loading..." });
     let quantity = e.target.elements.quantity.value;
+
+    const { stock, currentPice } = this.state;
+
+    const stockPurchase = {
+      stock: stock,
+      currentPice: currentPice
+    };
+
+    // Try to buy stock
+    //this.props.login(userLogin);
   };
 
   render() {
