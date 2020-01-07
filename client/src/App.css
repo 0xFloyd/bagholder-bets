@@ -24,6 +24,12 @@ body {
   border-radius: 50px;
 }
 
+.wsbNavLogo {
+  height: 5vh;
+  padding: 0px;
+  margin: 0px;
+}
+
 .wsbLoginLogo {
   height: 30% !important;
   border-radius: 50px;
@@ -83,7 +89,8 @@ body {
   }
 
   .wsbLoginLogo {
-    width: 20% !important;
+    width: 10% !important;
     border-radius: 50px;
+    margin-top: 30px;
   }
 }

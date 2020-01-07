@@ -6,8 +6,6 @@ import { loadUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
 
-store.dispatch(loadUser());
-
 class App extends Component {
   //load User from redux when app loads
   render() {

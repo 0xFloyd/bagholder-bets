@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers";
+import { loadUser } from "./actions/authActions";
 
 //create initial store of application
 const initialState = {};
@@ -18,5 +19,7 @@ const store = createStore(
     //,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
+
+store.dispatch(loadUser());
 
 export default store;

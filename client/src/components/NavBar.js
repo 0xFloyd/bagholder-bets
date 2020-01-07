@@ -59,13 +59,12 @@ class NavBar extends Component {
           variant="dark"
           className="mainSiteNavBar"
         >
-          <Navbar.Brand href="#home">Wall Street Bets</Navbar.Brand>
+          <a href="#home">
+            <img src={logo} alt="wsb logo" className="wsbNavLogo"></img>
+          </a>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link href="#features">Features</Nav.Link>
-              <Nav.Link href="#pricing">Pricing</Nav.Link>
-            </Nav>
+            <Nav className="mr-auto"></Nav>
             <Nav>{isAuthenticated ? userLinks : guestLinks}</Nav>
           </Navbar.Collapse>
         </Navbar>
