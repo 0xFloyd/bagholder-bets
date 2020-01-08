@@ -45,25 +45,25 @@ class Main extends Component {
   render() {
     // this includes all the state values
     console.log("Main component rendered");
-    //const { isAuthenticated, isLoading } = this.props.auth.isAuthenticated;
+    const { isAuthenticated, isLoading } = this.props.auth;
 
     return (
       <div>
         <BrowserRouter>
           <Switch>
             <Route
-              isAuthenticated={this.props.isAuthenticated}
+              isAuthenticated={isAuthenticated}
               path="/login"
               component={Login}
             />
             <Route
-              isAuthenticated={this.props.isAuthenticated}
+              isAuthenticated={isAuthenticated}
               path="/register"
               component={Register}
             />
             <ProtectedRoute
               path="/"
-              isAuthenticated={this.props.isAuthenticated}
+              isAuthenticated={isAuthenticated}
               component={Home}
             ></ProtectedRoute>
             <Route path="*" component={NotFound} />
