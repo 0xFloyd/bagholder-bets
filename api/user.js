@@ -7,6 +7,7 @@ const config = require("config");
 
 // Routes
 //POST Register Users
+
 router.post("/", (req, res) => {
   const { name, email, password } = req.body;
 

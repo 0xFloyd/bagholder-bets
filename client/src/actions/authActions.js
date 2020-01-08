@@ -16,6 +16,7 @@ import {
 // You can include getState as a second argument in dispatch to get the current state
 export const loadUser = () => (dispatch, getState) => {
   // User loading. dispatch this action, Pass this in before anything to change the state of application to loading
+  console.log("COMMENSE LOAD USER");
   dispatch({ type: USER_LOADING });
 
   axios
@@ -24,11 +25,11 @@ export const loadUser = () => (dispatch, getState) => {
       dispatch({
         type: USER_LOADED,
         payload: res.data //res.data should be the whole response. the token, and the user object
-      })
+      }).then(console.log("USER_LOADED Dispatch finished"))
     )
     //call error action to get errors if there are some. returnErrors takes in parameters, then returns object with errors
     .catch(err => {
-      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch(returnErrors(err));
       dispatch({
         type: AUTH_ERROR
       });
@@ -37,6 +38,7 @@ export const loadUser = () => (dispatch, getState) => {
 
 // Register user
 export const register = ({ name, email, password }) => dispatch => {
+  dispatch({ type: USER_LOADING });
   // configure headers
   const config = {
     headers: {
@@ -68,6 +70,7 @@ export const register = ({ name, email, password }) => dispatch => {
 
 // Login user
 export const login = ({ email, password }) => dispatch => {
+  dispatch({ type: USER_LOADING });
   // configure headers
   const config = {
     headers: {

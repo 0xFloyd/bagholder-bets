@@ -7,7 +7,12 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 class App extends Component {
+  componentDidMount() {
+    store.dispatch(loadUser());
+  }
+
   render() {
+    console.log("APP___MAIN component rendered");
     return (
       <Provider store={store}>
         <div className="App">

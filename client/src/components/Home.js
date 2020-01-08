@@ -15,48 +15,31 @@ class Home extends Component {
     password: "",
     msg: null,
     alertOpen: false,
-    loading: false
+    isLoading: false
   };
-
-  componentDidUpdate(prevProps) {
-    // Typical usage (don't forget to compare props):
-    if (this.props !== prevProps) {
-      this.setState({ loading: true });
-    }
-  }
 
   static propTypes = {
     auth: PropTypes.object,
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object,
     register: PropTypes.func,
-    clearErrors: PropTypes.func
+    clearErrors: PropTypes.func,
+    isLoading: PropTypes.bool
   };
 
   render() {
     // this includes all the state values
-    const { isAuthenticated, user, loading } = this.props.auth;
-    const currentBalance = numeral(user.balance).format("$0,0.00");
+
+    //const currentBalance = numeral(user.balance).format("$0,0.00");
 
     return (
       <div>
-        {isAuthenticated !== null ? (
-          <div>
-            <NavBar />
-            <Row className="justify-content-center">
-              <Col className="mt-3 text-center">
-                {loading ? "loading..." : currentBalance}
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <Search />
-              </Col>
-            </Row>
-          </div>
-        ) : (
-          <Spinner className="fullscreenSpinner"></Spinner>
-        )}
+        <NavBar />
+        <Row>
+          <Col>
+            <Search />
+          </Col>
+        </Row>
       </div>
     );
   }
@@ -65,7 +48,8 @@ class Home extends Component {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   auth: state.auth,
-  error: state.error
+  error: state.error,
+  isloading: state.auth.isLoading
 });
 
 export default connect(mapStateToProps)(Home);

@@ -52,6 +52,7 @@ class Login extends Component {
   };
 
   onSubmit = e => {
+    console.log("logging in...");
     this.props.clearErrors();
     e.preventDefault();
 
@@ -64,13 +65,13 @@ class Login extends Component {
 
     // Try to log in user
     this.props.login(userLogin);
-
-    if (this.props.isAuthenticated === true) {
-      return <Redirect to="/" />;
-    }
   };
 
   render() {
+    console.log("Login component rendered");
+    if (this.props.isAuthenticated === true) {
+      return <Redirect push to="/" />;
+    }
     return (
       <Container>
         <Row className="justify-content-center">

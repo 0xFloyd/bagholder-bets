@@ -22,8 +22,8 @@ const UserSchema = new mongoose.Schema({
   ],
 
   balance: {
-    type: Number,
-    default: 100000
+    type: String,
+    default: "100000"
   },
 
   email: {

@@ -6,6 +6,7 @@ import Login from "./Login";
 import Register from "./Register";
 import NotFound from "./NotFound";
 import ProtectedRoute from "./ProtectedRoute";
+import UnprotectedRoute from "./UnprotectedRoute";
 import Home from "./Home";
 import Spinner from "./Spinner";
 
@@ -37,38 +38,37 @@ class Main extends Component {
     auth: PropTypes.object,
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object,
-    clearErrors: PropTypes.func
+    clearErrors: PropTypes.func,
+    isLoading: PropTypes.bool
   };
-
-  async componentDidMount() {
-    console.log("Main async componentDidMount");
-    await this.props;
-    console.log("Main async componentDidMount done");
-  }
 
   render() {
     // this includes all the state values
-    console.log("main.js console log:", this.props);
-    const { isAuthenticated } = this.props.auth;
+    console.log("Main component rendered");
+    //const { isAuthenticated, isLoading } = this.props.auth.isAuthenticated;
 
     return (
       <div>
-        {isAuthenticated !== null ? (
-          <BrowserRouter>
-            <Switch>
-              <Route path="/login" component={Login} />
-              <Route path="/register" component={Register} />
-              <ProtectedRoute
-                path="/"
-                isAuthenticated={isAuthenticated}
-                component={Home}
-              ></ProtectedRoute>
-              <Route path="*" component={NotFound} />
-            </Switch>
-          </BrowserRouter>
-        ) : (
-          <Spinner className="fullscreenSpinner"></Spinner>
-        )}
+        <BrowserRouter>
+          <Switch>
+            <Route
+              isAuthenticated={this.props.isAuthenticated}
+              path="/login"
+              component={Login}
+            />
+            <Route
+              isAuthenticated={this.props.isAuthenticated}
+              path="/register"
+              component={Register}
+            />
+            <ProtectedRoute
+              path="/"
+              isAuthenticated={this.props.isAuthenticated}
+              component={Home}
+            ></ProtectedRoute>
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }
@@ -77,7 +77,8 @@ class Main extends Component {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   auth: state.auth,
-  error: state.error
+  error: state.error,
+  isloading: state.auth.isLoading
 });
 
 export default connect(mapStateToProps)(Main);

@@ -65,6 +65,7 @@ class NavBar extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto"></Nav>
+            <Nav>{user ? "Balance: " + user.balance : ""}</Nav>
             <Nav>{isAuthenticated ? userLinks : guestLinks}</Nav>
           </Navbar.Collapse>
         </Navbar>

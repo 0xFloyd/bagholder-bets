@@ -20,6 +20,4 @@ const store = createStore(
   )
 );
 
-store.dispatch(loadUser());
-
 export default store;

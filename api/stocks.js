@@ -9,8 +9,9 @@ const User = require("../models/user");
 //GET Stocks
 //@Access   Private
 
-router.get("/", authorize, (req, res) => {
-  Stock.find()
+router.get("/", (req, res) => {
+  console.log(req.user);
+  User.find()
     .sort({ date: -1 })
     .then(stock => res.json(stock));
 });
