@@ -19,8 +19,7 @@ class Home extends Component {
   };
 
   static propTypes = {
-    auth: PropTypes.object,
-    isAuthenticated: PropTypes.bool,
+    auth: PropTypes.object.isRequired,
     error: PropTypes.object,
     register: PropTypes.func,
     clearErrors: PropTypes.func,
