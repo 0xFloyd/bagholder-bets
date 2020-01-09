@@ -26,6 +26,11 @@ const UserSchema = new mongoose.Schema({
     default: "100000"
   },
 
+  cash: {
+    type: String,
+    default: "100000"
+  },
+
   email: {
     type: String,
     lowercase: true,

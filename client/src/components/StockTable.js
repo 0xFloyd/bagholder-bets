@@ -54,22 +54,20 @@ mapStateToProps we want to map state into component property, so we can always a
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Stock</TableCell>
-                <TableCell align="right">Name</TableCell>
+                <TableCell align="right">Stock</TableCell>
+                <TableCell align="right">ticker</TableCell>
                 <TableCell align="right">price</TableCell>
                 <TableCell align="right">quantity</TableCell>
                 <TableCell align="right">value</TableCell>
                 <TableCell align="right">iD</TableCell>
-                <TableCell align="right"></TableCell>
+                <TableCell align="right">SELL</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {stocks.map(item => (
                 <TableRow key={item._id}>
-                  <TableCell component="th" scope="row">
-                    {item.name}
-                  </TableCell>
-                  <TableCell align="right">{item.name}</TableCell>
+                  <TableCell align="right">{item.stock}</TableCell>
+                  <TableCell align="right">{item.ticker}</TableCell>
                   <TableCell align="right">${item.price}</TableCell>
                   <TableCell align="right">{item.quantity}</TableCell>
                   <TableCell align="right">

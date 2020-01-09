@@ -11,9 +11,7 @@ const User = require("../models/user");
 
 router.get("/", (req, res) => {
   console.log(req.user);
-  User.find()
-    .sort({ date: -1 })
-    .then(stock => res.json(stock));
+  Stock.find().then(stock => res.json(stock));
 });
 
 // Add new stock
@@ -26,6 +24,25 @@ router.post("/", authorize, (req, res) => {
   });
 
   newStock.save().then(stock => res.json(stock));
+});
+
+router.post("/buy", authorize, (req, res) => {
+  console.log(req.user);
+
+  if (!req.body.quantity) {
+    return res.status(400).json({ msg: "Please enter all fields" });
+  }
+
+  const purchasedStock = new Stock({
+    stock: req.body.stock,
+    ticker: req.body.ticker,
+    price: req.body.price,
+    quantity: req.body.quantity,
+    data: req.body.data,
+    value: req.body.value
+  });
+
+  purchasedStock.save().then(stock => res.json(stock));
 });
 
 //DELETE Stock

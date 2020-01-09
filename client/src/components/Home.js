@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import StockTable from "./StockTable";
+import StockModal from "./StockModal";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import NavBar from "./NavBar";
@@ -38,6 +39,10 @@ class Home extends Component {
           <Col>
             <Search />
           </Col>
+        </Row>
+        <Row>
+          <StockModal />
+          <StockTable />
         </Row>
       </div>
     );

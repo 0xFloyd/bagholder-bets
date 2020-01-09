@@ -4,7 +4,8 @@ import {
   ADD_STOCK,
   DELETE_STOCK,
   STOCKS_LOADING,
-  SEARCH_STOCK
+  SEARCH_STOCK,
+  BUY_SUCCESS
 } from "../actions/types";
 
 const initialState = {
@@ -29,6 +30,13 @@ export default function(state = initialState, action) {
       };
 
     case ADD_STOCK:
+      return {
+        ...state,
+        stocks: [...state.stocks, action.payload]
+        // we use spread operator because we can't directly mutate state, we just add to it
+      };
+
+    case BUY_SUCCESS:
       return {
         ...state,
         stocks: [...state.stocks, action.payload]

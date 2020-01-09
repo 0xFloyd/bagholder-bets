@@ -1,16 +1,37 @@
 import React, { Component } from "react";
-import { Form, Row, Col, Button, Container, Table } from "react-bootstrap";
+import {
+  Alert,
+  Form,
+  Row,
+  Col,
+  Button,
+  Container,
+  Table
+} from "react-bootstrap";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { buyStock } from "../actions/stockActions";
 var numeral = require("numeral");
 
-export default class Search extends Component {
+class Search extends Component {
   state = {
-    stock: "",
-    currentPice: "",
+    stock: null,
+    data: "",
+    ticker: "",
+    price: "",
     percentChange: "",
     ytdChange: "",
     high: "",
     low: "",
     quantity: ""
+  };
+
+  static propTypes = {
+    auth: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool,
+    error: PropTypes.object,
+    clearErrors: PropTypes.func,
+    buyStock: PropTypes.func.isRequired
   };
 
   onChange = e => {
@@ -20,7 +41,6 @@ export default class Search extends Component {
   onSubmit = async e => {
     //this.props.clearErrors();
     e.preventDefault();
-    console.log("clicked");
     this.setState({ stock: "loading..." });
     let ticker = e.target.elements.stockTicker.value;
     try {
@@ -34,10 +54,10 @@ export default class Search extends Component {
       console.log(response);
 
       this.setState({
-        stock:
-          response.symbol +
-          ": " +
-          numeral(response.latestPrice).format("$0,0.00"),
+        data: response,
+        stock: response.companyName,
+        ticker: response.symbol,
+        price: response.latestPrice,
         percentChange: numeral(response.changePercent).format("0.00%"),
         ytdChange: numeral(response.ytdChange).format("0.00%"),
         high: numeral(response.week52High).format("$0,0.00"),
@@ -49,22 +69,23 @@ export default class Search extends Component {
     }
   };
 
-  buyStock = async e => {
+  buyStockSubmit = e => {
     //this.props.clearErrors();
     e.preventDefault();
     console.log("clicked");
-    this.setState({ stock: "loading..." });
     let quantity = e.target.elements.quantity.value;
 
-    const { stock, currentPice } = this.state;
-
     const stockPurchase = {
-      stock: stock,
-      currentPice: currentPice
+      data: this.state.data,
+      stock: this.state.stock,
+      ticker: this.state.ticker,
+      price: this.state.price,
+      value: this.state.value,
+      quantity: quantity
     };
 
     // Try to buy stock
-    //this.props.login(userLogin);
+    this.props.buyStock(stockPurchase);
   };
 
   render() {
@@ -87,9 +108,13 @@ export default class Search extends Component {
           </Row>
         </Form>
         <Row className="justify-content-center">
-          <Col className="mt-3 mb-3 text-center">{this.state.stock}</Col>
+          <Col className="mt-3 mb-3 text-center">
+            {this.state.stock
+              ? this.state.ticker + ": $" + this.state.price
+              : ""}
+          </Col>
         </Row>
-        {this.state.stock !== "" ? (
+        {this.state.stock ? (
           <Container>
             <Table striped bordered hover size="sm">
               <thead>
@@ -109,7 +134,10 @@ export default class Search extends Component {
                 </tr>
               </tbody>
             </Table>
-            <Form onSubmit={this.buyStock}>
+            {this.state.msg ? (
+              <Alert variant="danger">{this.state.msg}</Alert>
+            ) : null}
+            <Form onSubmit={this.buyStockSubmit}>
               <Row>
                 <Col xs={8} md={{ span: 2, offset: 4 }}>
                   <Form.Control
@@ -131,6 +159,14 @@ export default class Search extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth,
+  error: state.error
+});
+
+export default connect(mapStateToProps, { buyStock })(Search);
 
 // stock is what we used in rootReducer
 

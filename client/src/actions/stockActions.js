@@ -5,7 +5,9 @@ import {
   ADD_STOCK,
   DELETE_STOCK,
   STOCKS_LOADING,
-  SEARCH_STOCK
+  SEARCH_STOCK,
+  BUY_SUCCESS,
+  BUY_FAIL
 } from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
@@ -50,6 +52,25 @@ export const addStock = stock => (dispatch, getState) => {
 
   return {
     type: ADD_STOCK,
+    payload: stock
+  };
+};
+
+export const buyStock = stock => (dispatch, getState) => {
+  axios
+    .post("/api/stocks/buy", stock, tokenConfig(getState))
+    .then(res =>
+      dispatch({
+        type: BUY_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch(returnErrors(err.response.data, err.response.status))
+    );
+
+  return {
+    type: BUY_SUCCESS,
     payload: stock
   };
 };

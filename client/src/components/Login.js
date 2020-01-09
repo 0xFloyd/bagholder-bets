@@ -27,9 +27,6 @@ class Login extends Component {
   componentDidUpdate(prevProps) {
     // we have access to this in props, you can see in redux tools
     const { error, isAuthenticated } = this.props;
-    if (prevProps.isAuthenticated || isAuthenticated) {
-      this.props.history.push("/");
-    }
 
     if (error !== prevProps.error) {
       // check for register error
