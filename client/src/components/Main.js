@@ -6,7 +6,6 @@ import Login from "./Login";
 import Register from "./Register";
 import NotFound from "./NotFound";
 import ProtectedRoute from "./ProtectedRoute";
-import UnprotectedRoute from "./UnprotectedRoute";
 import Home from "./Home";
 import Spinner from "./Spinner";
 
