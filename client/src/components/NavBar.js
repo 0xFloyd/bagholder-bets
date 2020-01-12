@@ -35,7 +35,9 @@ class NavBar extends Component {
             </span>
           </Nav.Link>
         </Nav>
-        <Logout />
+        <Nav>
+          <Logout />
+        </Nav>
       </Fragment>
     );
 

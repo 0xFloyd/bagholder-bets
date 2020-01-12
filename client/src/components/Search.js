@@ -71,17 +71,27 @@ class Search extends Component {
 
   buyStockSubmit = e => {
     //this.props.clearErrors();
+    var userBuying = "No user";
+    var value = "";
     e.preventDefault();
     console.log("clicked");
     let quantity = e.target.elements.quantity.value;
+    if (this.props.auth.user.id) {
+      userBuying = this.props.auth.user.id;
+    }
+
+    if (quantity && this.state.price) {
+      value = quantity * this.state.price;
+    }
 
     const stockPurchase = {
       data: this.state.data,
       stock: this.state.stock,
       ticker: this.state.ticker,
       price: this.state.price,
-      value: this.state.value,
-      quantity: quantity
+      value: value,
+      quantity: quantity,
+      user: userBuying
     };
 
     // Try to buy stock

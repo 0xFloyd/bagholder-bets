@@ -22,13 +22,13 @@ const UserSchema = new mongoose.Schema({
   ],
 
   balance: {
-    type: String,
-    default: "100000"
+    type: Number,
+    default: 100000
   },
 
   cash: {
-    type: String,
-    default: "100000"
+    type: Number,
+    default: 100000
   },
 
   email: {

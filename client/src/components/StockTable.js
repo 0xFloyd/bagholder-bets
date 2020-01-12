@@ -70,9 +70,7 @@ mapStateToProps we want to map state into component property, so we can always a
                   <TableCell align="right">{item.ticker}</TableCell>
                   <TableCell align="right">${item.price}</TableCell>
                   <TableCell align="right">{item.quantity}</TableCell>
-                  <TableCell align="right">
-                    ${Math.round(item.quantity * item.price)}
-                  </TableCell>
+                  <TableCell align="right">${Math.round(item.value)}</TableCell>
                   <TableCell align="right">{item._id}</TableCell>
                   <TableCell align="right">
                     {this.props.isAuthenticated ? (

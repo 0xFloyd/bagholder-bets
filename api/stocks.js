@@ -26,11 +26,29 @@ router.post("/", authorize, (req, res) => {
   newStock.save().then(stock => res.json(stock));
 });
 
-router.post("/buy", authorize, (req, res) => {
-  console.log(req.user);
+router.post("/buy", authorize, async (req, res) => {
+  if (!req.body.user) {
+    return res
+      .status(400)
+      .json({ msg: "You must be logged in as a user to buy stock" });
+  }
 
   if (!req.body.quantity) {
     return res.status(400).json({ msg: "Please enter all fields" });
+  }
+
+  const findUser = await User.findById(req.body.user);
+  var value = Number(req.body.value);
+  var userBalance = Number(findUser.balance);
+
+  if (value > userBalance) {
+    return res.status(400).json({ msg: "Insufficient funds for transaction." });
+  } else {
+    var newBalance = userBalance - value;
+    await User.updateOne(
+      { _id: req.body.user },
+      { $set: { balance: newBalance } }
+    );
   }
 
   const purchasedStock = new Stock({
@@ -39,7 +57,8 @@ router.post("/buy", authorize, (req, res) => {
     price: req.body.price,
     quantity: req.body.quantity,
     data: req.body.data,
-    value: req.body.value
+    value: req.body.value,
+    user: findUser
   });
 
   purchasedStock.save().then(stock => res.json(stock));
