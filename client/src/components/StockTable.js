@@ -82,7 +82,7 @@ mapStateToProps we want to map state into component property, so we can always a
             <tr>
               <th className="hide-on-mobile">Stock</th>
               <th>Symbol</th>
-              <th>Price</th>
+              <th>Buy Price</th>
               <th>Quantity</th>
               <th className="hide-on-mobile">Total</th>
               <th>Sell</th>
