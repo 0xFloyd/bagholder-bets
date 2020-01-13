@@ -1,16 +1,8 @@
 import React, { Component } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
+
 import { connect } from "react-redux";
 import { getStocks, deleteStock } from "../actions/stockActions";
-import Container from "@material-ui/core/Container";
+import { Row, Button, Table } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 class StockTable extends Component {
@@ -31,12 +23,13 @@ mapStateToProps we want to map state into component property, so we can always a
     getStocks: PropTypes.func.isRequired,
     deleteStock: PropTypes.func.isRequired,
     stock: PropTypes.object.isRequired,
-    isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool,
+    auth: PropTypes.object.isRequired
   };
 
   // call api, or making action request, is done as component mounts
   componentDidMount() {
-    this.props.getStocks();
+    this.props.getStocks(this.props.auth.user);
   }
 
   onDeleteClick = id => {
@@ -49,44 +42,48 @@ mapStateToProps we want to map state into component property, so we can always a
     // this grabs stocks option from state
     const { stocks } = this.props.stock;
     return (
-      <Container>
-        <TableContainer component={Paper}>
-          <Table aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="right">Stock</TableCell>
-                <TableCell align="right">ticker</TableCell>
-                <TableCell align="right">price</TableCell>
-                <TableCell align="right">quantity</TableCell>
-                <TableCell align="right">value</TableCell>
-                <TableCell align="right">iD</TableCell>
-                <TableCell align="right">SELL</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {stocks.map(item => (
-                <TableRow key={item._id}>
-                  <TableCell align="right">{item.stock}</TableCell>
-                  <TableCell align="right">{item.ticker}</TableCell>
-                  <TableCell align="right">${item.price}</TableCell>
-                  <TableCell align="right">{item.quantity}</TableCell>
-                  <TableCell align="right">${Math.round(item.value)}</TableCell>
-                  <TableCell align="right">{item._id}</TableCell>
-                  <TableCell align="right">
-                    {this.props.isAuthenticated ? (
-                      <Button onClick={this.onDeleteClick.bind(this, item._id)}>
-                        Sell
-                      </Button>
-                    ) : (
-                      <p>Please log in</p>
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Container>
+      <div>
+        <Row className="justify-content-center">
+          <h1>Portfolio</h1>
+        </Row>
+
+        <Table aria-label="simple table">
+          <thead>
+            <tr>
+              <th className="hide-on-mobile">Stock</th>
+              <th>Symbol</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th className="hide-on-mobile">Total</th>
+              <th>Sell</th>
+            </tr>
+          </thead>
+          <tbody>
+            {stocks.map(item => (
+              <tr key={item._id}>
+                <td className="hide-on-mobile">{item.stock}</td>
+                <td>{item.ticker}</td>
+                <td>${item.price}</td>
+                <td>{item.quantity}</td>
+                <td className="hide-on-mobile">${Math.round(item.value)}</td>
+                <td>
+                  {this.props.isAuthenticated ? (
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={this.onDeleteClick.bind(this, item._id)}
+                    >
+                      Sell
+                    </Button>
+                  ) : (
+                    <p>Please log in</p>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     );
   }
 }
@@ -94,7 +91,8 @@ mapStateToProps we want to map state into component property, so we can always a
 // stock is what we used in rootReducer
 const mapStateToProps = state => ({
   stock: state.stock,
-  isAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth
 });
 
 // all actions used in component go in second argument after mapStateToProps

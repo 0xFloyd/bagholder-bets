@@ -35,13 +35,12 @@ class Home extends Component {
     return (
       <div>
         <NavBar />
-        <Row>
+        <Row className="justify-content-center">
           <Col>
             <Search />
           </Col>
         </Row>
-        <Row>
-          <StockModal />
+        <Row className="justify-content-center">
           <StockTable />
         </Row>
       </div>

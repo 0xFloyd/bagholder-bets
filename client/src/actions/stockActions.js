@@ -16,14 +16,10 @@ import { returnErrors } from "./errorActions";
 // type is how you identify the action
 
 // we call these actions from within the component
-export const getStocks = id => dispatch => {
+export const getStocks = user => dispatch => {
   dispatch(setStocksLoading());
   axios
-    .get("/api/stocks", {
-      params: {
-        user: id
-      }
-    })
+    .post("/api/stocks/find", user)
     .then(res =>
       dispatch({
         type: GET_STOCKS,

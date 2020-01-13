@@ -9,9 +9,9 @@ const User = require("../models/user");
 //GET Stocks
 //@Access   Private
 
-router.get("/", (req, res) => {
-  console.log("Stock api get:" + req.body.user);
-  Stock.find().then(stock => res.json(stock));
+router.post("/find", (req, res) => {
+  //console.log("Stock api get:" + req.body.id);
+  Stock.find({ user: req.body.id }).then(stock => res.json(stock));
 });
 
 // Add new stock

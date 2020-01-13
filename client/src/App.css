@@ -68,6 +68,9 @@ body {
   .wsbLogo {
     width: 5% !important;
   }
+  .stockTableCellDesktop {
+    display: none;
+  }
 }
 
 /* // Medium devices (tablets, 768px and up) */
@@ -98,5 +101,11 @@ body {
     width: 10% !important;
     border-radius: 50px;
     margin-top: 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hide-on-mobile {
+    display: none;
   }
 }
