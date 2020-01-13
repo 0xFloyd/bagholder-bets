@@ -10,7 +10,7 @@ const User = require("../models/user");
 //@Access   Private
 
 router.get("/", (req, res) => {
-  console.log(req.user);
+  console.log("Stock api get:" + req.body.user);
   Stock.find().then(stock => res.json(stock));
 });
 
