@@ -39,7 +39,7 @@ export const getStocks = user => dispatch => {
 // You can include getState as a second argument in dispatch to get the current state
 export const addStock = stock => (dispatch, getState) => {
   axios
-    .post("/api/stocks", stock, tokenConfig(getState))
+    .post("/api/stocks/add", stock, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: ADD_STOCK,
@@ -95,13 +95,13 @@ export const searchStock = stock => (dispatch, getState) => {
 };
 
 // return returns to reducer
-export const deleteStock = id => (dispatch, getState) => {
+export const deleteStock = stock => (dispatch, getState) => {
   axios
-    .delete(`/api/stocks/${id}`, tokenConfig(getState))
+    .post(`/api/stocks/delete`, stock, tokenConfig(getState))
     .then(res =>
       dispatch({
         type: DELETE_STOCK,
-        payload: id
+        payload: res.data
       })
     )
     .catch(err =>
@@ -110,7 +110,7 @@ export const deleteStock = id => (dispatch, getState) => {
 
   return {
     type: DELETE_STOCK,
-    payload: id
+    payload: stock
   };
 };
 

@@ -44,7 +44,6 @@ class Search extends Component {
   onSubmit = async e => {
     //this.props.clearErrors();
     e.preventDefault();
-    this.setState({ stock: "loading..." });
     let ticker = e.target.elements.stockTicker.value;
     try {
       const searchStock = await fetch(
@@ -54,7 +53,6 @@ class Search extends Component {
         }
       ); //,{ mode: "cors" }
       const response = await searchStock.json();
-      console.log(response);
 
       this.setState({
         data: response,
@@ -67,8 +65,8 @@ class Search extends Component {
         low: numeral(response.week52Low).format("$0,0.00")
       });
     } catch (error) {
-      this.setState({ stock: "No stock found matching ticker" });
       alert("No stock found matching ticker");
+      document.getElementById("stockSearchForm").reset();
     }
   };
 
@@ -76,7 +74,7 @@ class Search extends Component {
     //this.props.clearErrors();
     var userBuying = "No user";
     var value = "";
-    e.preventDefault();
+    //e.preventDefault();
     console.log("clicked");
     let quantity = e.target.elements.quantity.value;
     if (this.props.auth.user.id) {
@@ -99,12 +97,26 @@ class Search extends Component {
 
     // Try to buy stock
     this.props.buyStock(stockPurchase);
+
+    this.setState({
+      stock: null,
+      data: "",
+      ticker: "",
+      price: "",
+      percentChange: "",
+      ytdChange: "",
+      high: "",
+      low: "",
+      quantity: ""
+    });
+
+    document.getElementById("stockSearchForm").reset();
   };
 
   render() {
     return (
       <Container className="mt-3 mb-3">
-        <Form onSubmit={this.onSubmit}>
+        <Form id="stockSearchForm" onSubmit={this.onSubmit}>
           <InputGroup className="mt-3 mb-3">
             <FormControl
               name="stockTicker"

@@ -18,6 +18,10 @@ in the second set of parentheses
 
 mapStateToProps we want to map state into component property, so we can always access it from this.props.< whatever >
 */
+  state = {
+    isOpen: false,
+    confirmSell: false
+  };
 
   static propTypes = {
     getStocks: PropTypes.func.isRequired,
@@ -32,8 +36,34 @@ mapStateToProps we want to map state into component property, so we can always a
     this.props.getStocks(this.props.auth.user);
   }
 
-  onDeleteClick = id => {
-    this.props.deleteStock(id);
+  toggle = () => {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  };
+
+  onDeleteClick = async stock => {
+    try {
+      const searchStock = await fetch(
+        `https://cloud.iexapis.com/v1/stock/${stock.ticker}/quote/2?token=pk_764a7652cfde425785b349da624c23ac`,
+        {
+          mode: "cors"
+        }
+      ); //,{ mode: "cors" }
+      const response = await searchStock.json();
+      var price = response.latestPrice;
+    } catch (error) {
+      alert("Couldn't sell stock");
+    }
+
+    var stock = {
+      user: this.props.auth.user,
+      id: stock._id,
+      price: price,
+      quantity: stock.quantity
+    };
+
+    this.props.deleteStock(stock);
   };
   render() {
     //stock represents entire state store. stocks is array of stocks inside
@@ -71,7 +101,7 @@ mapStateToProps we want to map state into component property, so we can always a
                     <Button
                       variant="danger"
                       size="sm"
-                      onClick={this.onDeleteClick.bind(this, item._id)}
+                      onClick={this.onDeleteClick.bind(this, item)}
                     >
                       Sell
                     </Button>

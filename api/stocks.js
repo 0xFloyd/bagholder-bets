@@ -16,7 +16,7 @@ router.post("/find", (req, res) => {
 
 // Add new stock
 //@Access   Private
-router.post("/", authorize, (req, res) => {
+router.post("/add", authorize, (req, res) => {
   const newStock = new Stock({
     name: req.body.name,
     price: req.body.price,
@@ -66,9 +66,18 @@ router.post("/buy", authorize, async (req, res) => {
 
 //DELETE Stock
 //@Access   Private
-router.delete("/:id", authorize, (req, res) => {
-  Stock.findById(req.params.id)
-    .then(stock => stock.remove().then(() => res.json({ success: true })))
+router.post("/delete", authorize, async (req, res) => {
+  const findUser = await User.findById(req.body.user.id);
+  var sellValue = Number(req.body.price) * Number(req.body.quantity);
+  var newBalance = Number(findUser.balance) + sellValue;
+
+  await User.updateOne(
+    { _id: req.body.user.id },
+    { $set: { balance: newBalance } }
+  );
+
+  Stock.findById(req.body.id)
+    .then(stock => stock.remove().then(stock => res.json(stock._id)))
     .catch(err => res.status(404).json({ success: false }));
 });
 
