@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 
 import Sidebar from "react-sidebar";
+import SideBar from "./SideBar";
 
 class NavBar extends Component {
   constructor(props) {
@@ -34,7 +35,8 @@ class NavBar extends Component {
     auth: PropTypes.object.isRequired,
     error: PropTypes.object,
     register: PropTypes.func,
-    clearErrors: PropTypes.func
+    clearErrors: PropTypes.func,
+    stock: PropTypes.object.isRequired
   };
 
   render() {
@@ -81,14 +83,7 @@ class NavBar extends Component {
 
     return (
       <div>
-        <Sidebar
-          pullRight={true}
-          sidebar={isAuthenticated ? userLinks : guestLinks}
-          open={this.state.sidebarOpen}
-          onSetOpen={this.onSetSidebarOpen}
-          styles={{ sidebar: { background: "white" } }}
-        ></Sidebar>
-        <Navbar expand="lg" variant="dark" className="mainSiteNavBar">
+        <Navbar expand="lg" variant="light" className="mainSiteNavBar">
           <Link to="/">
             <img
               src={logo}
@@ -113,7 +108,7 @@ class NavBar extends Component {
             class="blankButton"
             onClick={() => this.onSetSidebarOpen(true)}
           >
-            <FontAwesomeIcon icon={faEllipsisH} color="white" size="2x" />
+            <FontAwesomeIcon icon={faEllipsisH} color="green" size="2x" />
           </button>
         </Navbar>
       </div>
@@ -124,7 +119,8 @@ class NavBar extends Component {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   auth: state.auth,
-  error: state.error
+  error: state.error,
+  stock: state.stock
 });
 
 export default connect(mapStateToProps)(NavBar);

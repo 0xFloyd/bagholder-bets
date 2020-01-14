@@ -38,7 +38,7 @@ class Home extends Component {
         <Row className="justify-content-center">
           <StockTable />
         </Row>
-        <StockChart />
+        <Row className="justify-content-center"></Row>
       </div>
     );
   }

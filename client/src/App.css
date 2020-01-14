@@ -2,8 +2,8 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
-  overflow-x: hidden !important;
+  font-family: "DIN Web", sans-serif;
+  overflow-x: hidden;
 }
 
 .addstockbutton {
@@ -44,7 +44,7 @@ body {
 }
 
 .wsbPhraseLogo {
-  height: 10vh;
+  height: 7vh;
   padding: 0px;
   margin-left: 100px;
 }
@@ -67,15 +67,13 @@ body {
 }
 
 .mainSiteNavBar {
-  background-color: green !important;
 }
 
 .mainSiteNavBarLink {
-  font-size: 1.2rem !important;
 }
 
 .mainSiteNavBarLink:hover {
-  font-size: 1.2rem !important;
+  color: rgb(65, 165, 65) !important;
 }
 
 .no-spacing {
