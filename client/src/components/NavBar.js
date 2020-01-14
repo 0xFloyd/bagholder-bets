@@ -5,6 +5,7 @@ import Logout from "./Logout";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import logo from "../assets/wsb_logo.png";
+import { Link } from "react-router-dom";
 
 class NavBar extends Component {
   state = {
@@ -36,6 +37,11 @@ class NavBar extends Component {
           </Nav.Link>
         </Nav>
         <Nav>
+          <Nav.Link as={Link} to="/contact">
+            <span className="navbar-text mr-3">Contact</span>
+          </Nav.Link>
+        </Nav>
+        <Nav>
           <Logout />
         </Nav>
       </Fragment>
@@ -44,10 +50,10 @@ class NavBar extends Component {
     const guestLinks = (
       <Fragment>
         <Nav>
-          <Nav.Link href="#Register">Register</Nav.Link>
+          <Nav.Link href="Register">Register</Nav.Link>
         </Nav>
         <Nav>
-          <Nav.Link href="#Login">Login</Nav.Link>
+          <Nav.Link href="Login">Login</Nav.Link>
         </Nav>
       </Fragment>
     );
@@ -60,9 +66,9 @@ class NavBar extends Component {
           variant="dark"
           className="mainSiteNavBar"
         >
-          <a href="#home">
+          <Link to="/">
             <img src={logo} alt="wsb logo" className="wsbNavLogo"></img>
-          </a>
+          </Link>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto"></Nav>
