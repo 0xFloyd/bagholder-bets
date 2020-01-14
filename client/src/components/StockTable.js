@@ -73,46 +73,47 @@ mapStateToProps we want to map state into component property, so we can always a
     const { stocks } = this.props.stock;
     return (
       <div>
-        <Row className="justify-content-center">
+        <Row className="mt-4 justify-content-center">
           <h1>Portfolio</h1>
         </Row>
-
-        <Table aria-label="simple table">
-          <thead>
-            <tr>
-              <th className="hide-on-mobile">Stock</th>
-              <th>Symbol</th>
-              <th>Buy Price</th>
-              <th>Quantity</th>
-              <th className="hide-on-mobile">Total</th>
-              <th>Sell</th>
-            </tr>
-          </thead>
-          <tbody>
-            {stocks.map(item => (
-              <tr key={item._id}>
-                <td className="hide-on-mobile">{item.stock}</td>
-                <td>{item.ticker}</td>
-                <td>${item.price}</td>
-                <td>{item.quantity}</td>
-                <td className="hide-on-mobile">${Math.round(item.value)}</td>
-                <td>
-                  {this.props.isAuthenticated ? (
-                    <Button
-                      variant="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, item)}
-                    >
-                      Sell
-                    </Button>
-                  ) : (
-                    <p>Please log in</p>
-                  )}
-                </td>
+        <Row className="mt-3 justify-content-center">
+          <Table aria-label="simple table">
+            <thead>
+              <tr>
+                <th className="hide-on-mobile">Stock</th>
+                <th>Symbol</th>
+                <th>Buy Price</th>
+                <th>Quantity</th>
+                <th className="hide-on-mobile">Total</th>
+                <th>Sell</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {stocks.map(item => (
+                <tr key={item._id}>
+                  <td className="hide-on-mobile">{item.stock}</td>
+                  <td>{item.ticker}</td>
+                  <td>${item.price}</td>
+                  <td>{item.quantity}</td>
+                  <td className="hide-on-mobile">${Math.round(item.value)}</td>
+                  <td>
+                    {this.props.isAuthenticated ? (
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={this.onDeleteClick.bind(this, item)}
+                      >
+                        Sell
+                      </Button>
+                    ) : (
+                      <p>Please log in</p>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Row>
       </div>
     );
   }

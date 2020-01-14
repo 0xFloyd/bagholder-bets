@@ -3,6 +3,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
+  overflow-x: hidden !important;
 }
 
 .addstockbutton {
@@ -31,14 +32,26 @@ body {
 }
 
 .wsbNavLogo {
-  height: 5vh;
+  height: 8vh;
   padding: 0px;
   margin: 0px;
+  border-radius: 50px;
 }
 
 .wsbLoginLogo {
   height: 30% !important;
   border-radius: 50px;
+}
+
+.wsbPhraseLogo {
+  height: 10vh;
+  padding: 0px;
+  margin-left: 100px;
+}
+
+.blankButton {
+  border: none;
+  background-color: green;
 }
 
 .stock-search-button {
@@ -54,8 +67,15 @@ body {
 }
 
 .mainSiteNavBar {
-  background-color: green;
-  color: white;
+  background-color: green !important;
+}
+
+.mainSiteNavBarLink {
+  font-size: 1.2rem !important;
+}
+
+.mainSiteNavBarLink:hover {
+  font-size: 1.2rem !important;
 }
 
 .no-spacing {
@@ -89,6 +109,13 @@ body {
     width: 20% !important;
     border-radius: 50px;
   }
+  .blankButton {
+    display: none;
+  }
+
+  .hide-on-desktop {
+    display: none;
+  }
 }
 
 /*  Extra large devices (large desktops, 1200px and up) */
@@ -101,6 +128,13 @@ body {
     width: 10% !important;
     border-radius: 50px;
     margin-top: 30px;
+  }
+  .blankButton {
+    display: none;
+  }
+
+  .hide-on-desktop {
+    display: none;
   }
 }
 

@@ -4,7 +4,6 @@ import StockModal from "./StockModal";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import NavBar from "./NavBar";
-import Search from "./Search";
 import { Col, Row } from "react-bootstrap";
 import Spinner from "./Spinner";
 import StockChart from "./PieChart";
@@ -36,11 +35,6 @@ class Home extends Component {
     return (
       <div>
         <NavBar />
-        <Row className="justify-content-center">
-          <Col>
-            <Search />
-          </Col>
-        </Row>
         <Row className="justify-content-center">
           <StockTable />
         </Row>

@@ -14,6 +14,7 @@ import {
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { buyStock } from "../actions/stockActions";
+import NavBar from "./NavBar";
 var numeral = require("numeral");
 
 class Search extends Component {
@@ -115,75 +116,87 @@ class Search extends Component {
 
   render() {
     return (
-      <Container className="mt-3 mb-3">
-        <Form id="stockSearchForm" onSubmit={this.onSubmit}>
-          <InputGroup className="mt-3 mb-3">
-            <FormControl
-              name="stockTicker"
-              placeholder="stock ticker"
-              aria-label="stock ticker"
-              onChange={this.onChange}
-            />
-            <InputGroup.Append>
-              <Button
-                className="input-group-btn stock-search-button"
-                type="submit"
-              >
-                Search
-              </Button>
-            </InputGroup.Append>
-          </InputGroup>
-        </Form>
-
-        <Row className="justify-content-center">
-          <Col className="mt-3 mb-3 text-center">
-            {this.state.stock
-              ? this.state.ticker + ": $" + this.state.price
-              : ""}
-          </Col>
+      <div>
+        <NavBar />
+        <Row className="mt-4 justify-content-center">
+          <h1>Search</h1>
         </Row>
-        {this.state.stock ? (
-          <Container>
-            <Table striped bordered hover size="sm">
-              <thead>
-                <tr>
-                  <th className="text-center">Today</th>
-                  <th className="text-center">YTD</th>
-                  <th className="text-center">High</th>
-                  <th className="text-center">Low</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="text-center">{this.state.percentChange}</td>
-                  <td className="text-center">{this.state.ytdChange}</td>
-                  <td className="text-center">{this.state.high}</td>
-                  <td className="text-center">{this.state.low}</td>
-                </tr>
-              </tbody>
-            </Table>
-            {this.state.msg ? (
-              <Alert variant="danger">{this.state.msg}</Alert>
-            ) : null}
-            <Form onSubmit={this.buyStockSubmit}>
-              <Row>
-                <Col xs={8} md={{ span: 2, offset: 4 }}>
-                  <Form.Control
-                    name="quantity"
+        <Row className="justify-content-center">
+          <Col>
+            <Container className="mt-3 mb-3">
+              <Form id="stockSearchForm" onSubmit={this.onSubmit}>
+                <InputGroup className="mt-3 mb-3">
+                  <FormControl
+                    name="stockTicker"
+                    placeholder="stock ticker"
+                    aria-label="stock ticker"
                     onChange={this.onChange}
-                    placeholder="quantity"
                   />
-                </Col>
-                <Col xs={4} md={{ span: 3 }}>
-                  <Button className="stock-search-button" type="submit">
-                    Buy
-                  </Button>
+                  <InputGroup.Append>
+                    <Button
+                      className="input-group-btn stock-search-button"
+                      type="submit"
+                    >
+                      Search
+                    </Button>
+                  </InputGroup.Append>
+                </InputGroup>
+              </Form>
+
+              <Row className="justify-content-center">
+                <Col className="mt-3 mb-3 text-center">
+                  {this.state.stock
+                    ? this.state.ticker + ": $" + this.state.price
+                    : ""}
                 </Col>
               </Row>
-            </Form>
-          </Container>
-        ) : null}
-      </Container>
+              {this.state.stock ? (
+                <Container>
+                  <Table striped bordered hover size="sm">
+                    <thead>
+                      <tr>
+                        <th className="text-center">Today</th>
+                        <th className="text-center">YTD</th>
+                        <th className="text-center">High</th>
+                        <th className="text-center">Low</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td className="text-center">
+                          {this.state.percentChange}
+                        </td>
+                        <td className="text-center">{this.state.ytdChange}</td>
+                        <td className="text-center">{this.state.high}</td>
+                        <td className="text-center">{this.state.low}</td>
+                      </tr>
+                    </tbody>
+                  </Table>
+                  {this.state.msg ? (
+                    <Alert variant="danger">{this.state.msg}</Alert>
+                  ) : null}
+                  <Form onSubmit={this.buyStockSubmit}>
+                    <Row>
+                      <Col xs={8} md={{ span: 2, offset: 4 }}>
+                        <Form.Control
+                          name="quantity"
+                          onChange={this.onChange}
+                          placeholder="quantity"
+                        />
+                      </Col>
+                      <Col xs={4} md={{ span: 3 }}>
+                        <Button className="stock-search-button" type="submit">
+                          Buy
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Form>
+                </Container>
+              ) : null}
+            </Container>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }

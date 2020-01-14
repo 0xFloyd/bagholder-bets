@@ -18,7 +18,7 @@ class Logout extends Component {
             onClick={this.props.logout}
             href="#"
           >
-            <span className="navbar-text mr-3">Logout</span>
+            <span className="mainSiteNavBarLink navbar-text mr-3">Logout</span>
           </Nav.Link>
         </Nav>
       </Fragment>
