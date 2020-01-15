@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var moment = require("moment");
 //const validator = require("validator");
 //const bcrypt = require("bcrypt");
 //const jwt = require("jsonwebtoken");
@@ -14,10 +15,10 @@ const UserSchema = new mongoose.Schema({
     default: Date.now
   },
 
-  stocks: [
+  history: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Stock"
+      type: String,
+      default: "Joined on " + moment().format("l")
     }
   ],
 

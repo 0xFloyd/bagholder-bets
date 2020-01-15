@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import StockTable from "./StockTable";
 import StockModal from "./StockModal";
+import StockHistory from "./StockHistory";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import NavBar from "./NavBar";
@@ -38,7 +39,9 @@ class Home extends Component {
         <Row className="justify-content-center">
           <StockTable />
         </Row>
-        <Row className="justify-content-center"></Row>
+        <Row className="justify-content-center">
+          <StockHistory />
+        </Row>
       </div>
     );
   }

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const authorize = require("../middleware/authorize");
-
+var moment = require("moment");
 const Stock = require("../models/stock");
 const User = require("../models/user");
 
@@ -49,6 +49,24 @@ router.post("/buy", authorize, async (req, res) => {
       { _id: req.body.user },
       { $set: { balance: newBalance } }
     );
+
+    var historyEntry =
+      "Bought " +
+      req.body.quantity +
+      " shares of " +
+      req.body.ticker +
+      " for " +
+      req.body.price +
+      " each on " +
+      moment().format("l") +
+      " for " +
+      value +
+      ".";
+    console.log(historyEntry);
+    await User.updateOne(
+      { _id: req.body.user },
+      { $push: { history: historyEntry } }
+    );
   }
 
   const purchasedStock = new Stock({
@@ -74,6 +92,25 @@ router.post("/delete", authorize, async (req, res) => {
   await User.updateOne(
     { _id: req.body.user.id },
     { $set: { balance: newBalance } }
+  );
+
+  var historyEntry =
+    "Sold " +
+    req.body.quantity +
+    " shares of " +
+    req.body.ticker +
+    " for " +
+    req.body.price +
+    " each on " +
+    moment().format("l") +
+    " for " +
+    sellValue +
+    ".";
+
+  console.log(historyEntry);
+  await User.updateOne(
+    { _id: req.body.user.id },
+    { $push: { history: historyEntry } }
   );
 
   Stock.findById(req.body.id)

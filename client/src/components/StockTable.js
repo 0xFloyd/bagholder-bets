@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 import { getStocks, deleteStock } from "../actions/stockActions";
-import { Row, Button, Table } from "react-bootstrap";
+import { Row, Button, Table, Alert } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 class StockTable extends Component {
@@ -28,7 +28,9 @@ mapStateToProps we want to map state into component property, so we can always a
     deleteStock: PropTypes.func.isRequired,
     stock: PropTypes.object.isRequired,
     isAuthenticated: PropTypes.bool,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    error: PropTypes.object.isRequired,
+    success: PropTypes.object
   };
 
   // call api, or making action request, is done as component mounts
@@ -60,7 +62,8 @@ mapStateToProps we want to map state into component property, so we can always a
       user: this.props.auth.user,
       id: stock._id,
       price: price,
-      quantity: stock.quantity
+      quantity: stock.quantity,
+      ticker: stock.ticker
     };
 
     this.props.deleteStock(stock);
@@ -77,6 +80,9 @@ mapStateToProps we want to map state into component property, so we can always a
         <Row className="mt-4 justify-content-center">
           <h1>Portfolio</h1>
         </Row>
+        {this.state.msg ? (
+          <Alert variant="danger">{this.state.msg}</Alert>
+        ) : null}
 
         <Table aria-label="simple table">
           <thead>
@@ -123,7 +129,9 @@ mapStateToProps we want to map state into component property, so we can always a
 const mapStateToProps = state => ({
   stock: state.stock,
   isAuthenticated: state.auth.isAuthenticated,
-  auth: state.auth
+  auth: state.auth,
+  error: state.error,
+  success: state.success
 });
 
 // all actions used in component go in second argument after mapStateToProps
