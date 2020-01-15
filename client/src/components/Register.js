@@ -114,7 +114,7 @@ class Register extends Component {
                 onChange={this.onChange}
               />
             </Form.Group>
-            <Button className="" type="submit">
+            <Button className="splash-form-button" type="submit">
               Login
             </Button>
           </form>

@@ -103,18 +103,21 @@ class Login extends Component {
                 onChange={this.onChange}
               />
             </Form.Group>
-            <Button className="loginSplashButton" type="submit">
+            <Button
+              className="justify-content-center splash-form-button"
+              type="submit"
+            >
               Login
             </Button>
           </form>
         </Row>
         <Row className="justify-content-center mt-4">
-          <Nav.Link href="#" variant="body2">
+          <Nav.Link href="#" className="green-theme-text" variant="body2">
             Forgot password?
           </Nav.Link>
         </Row>
         <Row className="justify-content-center">
-          <Nav.Link href="register">
+          <Nav.Link className="green-theme-text" href="register">
             {"Don't have an account? Sign Up"}
           </Nav.Link>
         </Row>

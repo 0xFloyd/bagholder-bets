@@ -90,6 +90,20 @@ body {
   color: rgb(33, 206, 153);
 }
 
+.splash-form-button {
+  background-color: rgb(33, 206, 153);
+  border: none;
+}
+
+.green-theme-text {
+  color: rgb(33, 206, 153);
+}
+
+th,
+td {
+  color: rgb(33, 206, 153) !important;
+}
+
 /* // Extra small devices (portrait phones, less than 576px) */
 @media (min-width: 576px) {
   .wsbLogo {
