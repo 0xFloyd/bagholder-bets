@@ -15,7 +15,7 @@ class App extends Component {
     console.log("APP___MAIN component rendered");
     return (
       <Provider store={store}>
-        <div className="App">
+        <div id="App" className="App">
           <Main />
         </div>
       </Provider>

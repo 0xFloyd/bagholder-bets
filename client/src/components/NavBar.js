@@ -9,26 +9,19 @@ import wsbphrase from "../assets/wsb.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
-
-import Sidebar from "react-sidebar";
-import SideBar from "./SideBar";
+//import SideBar from "./SideBar";
+import { slide as Menu } from "react-burger-menu";
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sidebarOpen: false,
       name: "",
       email: "",
       password: "",
       msg: null,
       alertOpen: false
     };
-    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
-  }
-
-  onSetSidebarOpen(open) {
-    this.setState({ sidebarOpen: open });
   }
 
   static propTypes = {
@@ -83,6 +76,9 @@ class NavBar extends Component {
 
     return (
       <div>
+        <Menu right outerContainerId={"App"}>
+          {isAuthenticated ? userLinks : guestLinks}
+        </Menu>
         <Navbar expand="lg" variant="light" className="mainSiteNavBar">
           <Link to="/">
             <img
@@ -99,17 +95,12 @@ class NavBar extends Component {
             ></img>
           </Link>
           <Nav className="mr-auto"></Nav>
-          <Nav>{user ? "Balance: " + user.balance : ""}</Nav>
           <Nav className="hide-on-mobile">
+            {user ? "Balance: " + user.balance : ""}
+          </Nav>
+          <Nav className="navbar-desktop-links hide-on-mobile">
             {isAuthenticated ? userLinks : guestLinks}
           </Nav>
-
-          <button
-            class="blankButton"
-            onClick={() => this.onSetSidebarOpen(true)}
-          >
-            <FontAwesomeIcon icon={faEllipsisH} color="green" size="2x" />
-          </button>
         </Navbar>
       </div>
     );

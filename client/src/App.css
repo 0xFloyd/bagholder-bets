@@ -4,6 +4,8 @@ body {
   padding: 0;
   font-family: "DIN Web", sans-serif;
   overflow-x: hidden;
+  background-color: #373a47;
+  color: rgb(33, 206, 153);
 }
 
 .addstockbutton {
@@ -51,13 +53,13 @@ body {
 
 .blankButton {
   border: none;
-  background-color: green;
+  background-color: rgb(33, 206, 153);
 }
 
 .stock-search-button {
   border-radius: 4px;
-  background-color: green;
-  border: 0px solid green;
+  background-color: rgb(33, 206, 153);
+  border: 0px solid rgb(33, 206, 153);
 }
 
 .stock-search-button:hover {
@@ -67,9 +69,11 @@ body {
 }
 
 .mainSiteNavBar {
+  color: rgb(33, 206, 153);
 }
 
 .mainSiteNavBarLink {
+  color: rgb(33, 206, 153) !important;
 }
 
 .mainSiteNavBarLink:hover {
@@ -79,6 +83,11 @@ body {
 .no-spacing {
   margin: 0;
   padding: 0;
+}
+
+.navbar-desktop-links {
+  margin-right: 50px;
+  color: rgb(33, 206, 153);
 }
 
 /* // Extra small devices (portrait phones, less than 576px) */
@@ -114,6 +123,10 @@ body {
   .hide-on-desktop {
     display: none;
   }
+
+  .bm-burger-button {
+    display: none;
+  }
 }
 
 /*  Extra large devices (large desktops, 1200px and up) */
@@ -134,6 +147,10 @@ body {
   .hide-on-desktop {
     display: none;
   }
+
+  .bm-burger-button {
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {
@@ -141,3 +158,74 @@ body {
     display: none;
   }
 }
+
+/* ~~~~~~~~~~~~~~~~ SIDEBAR STYLES  ~~~~~~~~~~~~~~~~ */
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 30px;
+  height: 26px;
+  right: 26px;
+  top: 26px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: rgb(33, 206, 153);
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: rgb(80, 182, 80);
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: rgb(33, 206, 153);
+}
+
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #373a47;
+  padding: 1em;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #373a47;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+  padding: 0.8em;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* ~~~~~~~~~~~~~~~~ END SIDEBAR STYLES  ~~~~~~~~~~~~~~~~ */
