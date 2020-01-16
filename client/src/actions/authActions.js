@@ -25,7 +25,7 @@ export const loadUser = () => (dispatch, getState) => {
       dispatch({
         type: USER_LOADED,
         payload: res.data //res.data should be the whole response. the token, and the user object
-      }).then(console.log("USER_LOADED Dispatch finished"))
+      })
     )
     //call error action to get errors if there are some. returnErrors takes in parameters, then returns object with errors
     .catch(err => {

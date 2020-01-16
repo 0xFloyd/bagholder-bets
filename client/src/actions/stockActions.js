@@ -11,13 +11,14 @@ import {
 } from "./types";
 import { tokenConfig } from "./authActions";
 import { returnErrors } from "./errorActions";
+import { loadUser } from "./authActions";
+import store from "../store";
 
 // the return is where we're implementing the action.type that's seen in the reducer.
 // type is how you identify the action
 
 // we call these actions from within the component
 export const getStocks = user => dispatch => {
-  dispatch(setStocksLoading());
   axios
     .post("/api/stocks/find", user)
     .then(res =>
