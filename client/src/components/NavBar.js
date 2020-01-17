@@ -29,12 +29,14 @@ class NavBar extends Component {
     error: PropTypes.object,
     register: PropTypes.func,
     clearErrors: PropTypes.func,
-    stock: PropTypes.object.isRequired
+    stock: PropTypes.object.isRequired,
+    user: PropTypes.object
   };
 
   render() {
     // this includes all the state values
-    const { isAuthenticated, user } = this.props.auth;
+    const { isAuthenticated } = this.props.auth;
+    const user = this.props.user;
 
     const userLinks = (
       <Fragment>
@@ -111,7 +113,8 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   auth: state.auth,
   error: state.error,
-  stock: state.stock
+  stock: state.stock,
+  user: state.user
 });
 
 export default connect(mapStateToProps)(NavBar);
