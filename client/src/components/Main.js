@@ -45,7 +45,7 @@ class Main extends Component {
 
   render() {
     // this includes all the state values
-    console.log("Main component rendered");
+
     const { isAuthenticated, isLoading } = this.props.auth;
 
     return (

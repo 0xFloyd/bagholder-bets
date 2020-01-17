@@ -16,7 +16,7 @@ import {
 // You can include getState as a second argument in dispatch to get the current state
 export const loadUser = () => (dispatch, getState) => {
   // User loading. dispatch this action, Pass this in before anything to change the state of application to loading
-  console.log("COMMENSE LOAD USER");
+
   dispatch({ type: USER_LOADING });
 
   axios

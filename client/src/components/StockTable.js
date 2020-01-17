@@ -73,7 +73,7 @@ mapStateToProps we want to map state into component property, so we can always a
     //stock represents entire state store. stocks is array of stocks inside
     //this.props.stock.stocks
 
-    // this grabs stocks option from state
+    // this grabs stocks option from stock state (stockReducer)
     const { stocks } = this.props.stock;
     return (
       <div>

@@ -9,7 +9,8 @@ import {
 
 const initialState = {
   stocks: [],
-  loading: false
+  loading: false,
+  user: null
 };
 
 // returns data from store based on action (IE: action type)
