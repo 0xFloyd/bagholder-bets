@@ -9,6 +9,7 @@ import wsbphrase from "../assets/wsb.png";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+import { refreshUserData } from "../actions/userActions";
 //import SideBar from "./SideBar";
 import { slide as Menu } from "react-burger-menu";
 
@@ -33,11 +34,14 @@ class NavBar extends Component {
     user: PropTypes.object
   };
 
+  componentDidMount() {
+    this.props.refreshUserData(this.props.auth.user);
+  }
+
   render() {
     // this includes all the state values
     const { isAuthenticated } = this.props.auth;
-    const user = this.props.user;
-
+    const { user } = this.props.user;
     const userLinks = (
       <Fragment>
         <Nav>
@@ -117,4 +121,4 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps)(NavBar);
+export default connect(mapStateToProps, { refreshUserData })(NavBar);

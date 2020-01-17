@@ -40,7 +40,8 @@ class Main extends Component {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object,
     clearErrors: PropTypes.func,
-    isLoading: PropTypes.bool
+    isLoading: PropTypes.bool,
+    user: PropTypes.object
   };
 
   render() {
@@ -90,7 +91,8 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   auth: state.auth,
   error: state.error,
-  isloading: state.auth.isLoading
+  isloading: state.auth.isLoading,
+  user: state.user
 });
 
 export default connect(mapStateToProps)(Main);

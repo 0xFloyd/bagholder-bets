@@ -57,6 +57,7 @@ class Search extends Component {
       ); //,{ mode: "cors" }
       const response = await searchStock.json();
 
+      // temporarily show stock metrics so user can decide if they want to buy stock
       this.setState({
         data: response,
         stock: response.companyName,
@@ -73,7 +74,7 @@ class Search extends Component {
     }
   };
 
-  buyStockSubmit = e => {
+  buyStockSubmit = async e => {
     //this.props.clearErrors();
     var userBuying = this.props.auth.user;
     var value = "";
@@ -101,11 +102,11 @@ class Search extends Component {
     };
 
     // Try to buy stock
-    this.props.buyStock(stockPurchase);
+    await this.props.buyStock(stockPurchase);
     console.group(
       "Value being passed into refreshUserData action: " + userBuying
     );
-    this.props.refreshUserData(userBuying);
+    await this.props.refreshUserData(userBuying);
 
     this.setState({
       stock: null,

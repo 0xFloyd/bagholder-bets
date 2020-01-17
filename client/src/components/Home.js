@@ -25,7 +25,8 @@ class Home extends Component {
     error: PropTypes.object,
     register: PropTypes.func,
     clearErrors: PropTypes.func,
-    isLoading: PropTypes.bool
+    isLoading: PropTypes.bool,
+    user: PropTypes.object
   };
 
   render() {
@@ -51,7 +52,8 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   auth: state.auth,
   error: state.error,
-  isloading: state.auth.isLoading
+  isloading: state.auth.isLoading,
+  user: state.user
 });
 
 export default connect(mapStateToProps)(Home);
