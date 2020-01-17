@@ -14,6 +14,7 @@ import {
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { buyStock } from "../actions/stockActions";
+import { refreshUserData } from "../actions/userActions";
 import NavBar from "./NavBar";
 var numeral = require("numeral");
 
@@ -34,6 +35,7 @@ class Search extends Component {
     auth: PropTypes.object.isRequired,
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object,
+    user: PropTypes.object,
     clearErrors: PropTypes.func,
     buyStock: PropTypes.func.isRequired
   };
@@ -73,14 +75,16 @@ class Search extends Component {
 
   buyStockSubmit = e => {
     //this.props.clearErrors();
-    var userBuying = "No user";
+    var userBuying = this.props.auth.user;
     var value = "";
     //e.preventDefault();
     console.log("clicked");
     let quantity = e.target.elements.quantity.value;
-    if (this.props.auth.user.id) {
-      userBuying = this.props.auth.user.id;
-    }
+
+    /*
+    if (this.props.auth.user._id) {
+      userBuying = this.props.auth.user._id;
+    } */
 
     if (quantity && this.state.price) {
       value = quantity * this.state.price;
@@ -93,11 +97,15 @@ class Search extends Component {
       price: this.state.price,
       value: value,
       quantity: quantity,
-      user: userBuying
+      user: userBuying.id
     };
 
     // Try to buy stock
     this.props.buyStock(stockPurchase);
+    console.group(
+      "Value being passed into refreshUserData action: " + userBuying
+    );
+    this.props.refreshUserData(userBuying);
 
     this.setState({
       stock: null,
@@ -204,10 +212,11 @@ class Search extends Component {
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   auth: state.auth,
-  error: state.error
+  error: state.error,
+  user: state.user
 });
 
-export default connect(mapStateToProps, { buyStock })(Search);
+export default connect(mapStateToProps, { buyStock, refreshUserData })(Search);
 
 // stock is what we used in rootReducer
 

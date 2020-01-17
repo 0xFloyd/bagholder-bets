@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const config = require("config");
-
+const authorize = require("../middleware/authorize");
 // Routes
 //POST Register Users
 
@@ -60,6 +60,15 @@ router.post("/", (req, res) => {
       });
     });
   });
+});
+
+router.post("/data", (req, res) => {
+  console.log(
+    "api/user/data called. req.body.user: " + JSON.stringify(req.body.id)
+  );
+  User.findById(req.body.id) //or change this to just req.body.user   if you map id to user in body
+    .then(user => res.json(user))
+    .catch(err => res.status(404).json({ success: false }));
 });
 
 //DELETE User
