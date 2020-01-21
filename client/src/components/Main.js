@@ -7,6 +7,7 @@ import Register from "./Register";
 import NotFound from "./NotFound";
 import ProtectedRoute from "./ProtectedRoute";
 import Home from "./Home";
+import Account from "./Account";
 import Contact from "./Contact";
 import Buy from "./Buy";
 import Spinner from "./Spinner";
@@ -78,6 +79,11 @@ class Main extends Component {
               path="/buy"
               isAuthenticated={isAuthenticated}
               component={Buy}
+            ></ProtectedRoute>
+            <ProtectedRoute
+              path="/account"
+              isAuthenticated={isAuthenticated}
+              component={Account}
             ></ProtectedRoute>
             <Route path="*" component={NotFound} />
           </Switch>

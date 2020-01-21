@@ -38,6 +38,7 @@ mapStateToProps we want to map state into component property, so we can always a
   // call api, or making action request, is done as component mounts
   componentDidMount() {
     this.props.getStocks(this.props.auth.user);
+    this.props.refreshUserData(this.props.auth.user);
   }
 
   toggle = () => {

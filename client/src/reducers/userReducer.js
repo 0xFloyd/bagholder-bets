@@ -1,7 +1,8 @@
 import { REFRESH_USER_DATA } from "../actions/types";
 
 const initialState = {
-  user: null
+  user: null,
+  balance: ""
 };
 
 export default function(state = initialState, action) {
@@ -10,6 +11,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         user: action.payload
+        //balance: action.payload.balance
       };
 
     default:

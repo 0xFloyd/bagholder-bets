@@ -74,7 +74,7 @@ class Search extends Component {
     }
   };
 
-  buyStockSubmit = async e => {
+  buyStockSubmit = e => {
     //this.props.clearErrors();
     var userBuying = this.props.auth.user;
     var value = "";
@@ -102,11 +102,7 @@ class Search extends Component {
     };
 
     // Try to buy stock
-    await this.props.buyStock(stockPurchase);
-    console.group(
-      "Value being passed into refreshUserData action: " + userBuying
-    );
-    await this.props.refreshUserData(userBuying);
+    this.props.buyStock(stockPurchase);
 
     this.setState({
       stock: null,

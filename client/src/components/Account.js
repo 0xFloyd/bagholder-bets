@@ -1,16 +1,13 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import StockTable from "./StockTable";
-import StockModal from "./StockModal";
+
 import StockHistory from "./StockHistory";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import NavBar from "./NavBar";
 import { Col, Row } from "react-bootstrap";
-import Spinner from "./Spinner";
-import StockChart from "./PieChart";
-var numeral = require("numeral");
 
-class Home extends Component {
+class Account extends Component {
   state = {
     name: "",
     email: "",
@@ -38,7 +35,7 @@ class Home extends Component {
       <div>
         <NavBar />
         <Row className="justify-content-center">
-          <StockTable />
+          <StockHistory />
         </Row>
       </div>
     );
@@ -46,6 +43,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
+  stock: state.stock,
   isAuthenticated: state.auth.isAuthenticated,
   auth: state.auth,
   error: state.error,
@@ -53,4 +51,4 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Account);

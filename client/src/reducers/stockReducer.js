@@ -32,8 +32,7 @@ export default function(state = initialState, action) {
     case ADD_STOCK:
       return {
         ...state,
-        stocks: [...state.stocks, action.payload],
-        user: action.payload.user
+        stocks: [...state.stocks, action.payload]
         // we use spread operator because we can't directly mutate state, we just add to it
       };
 

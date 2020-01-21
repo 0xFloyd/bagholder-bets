@@ -10,6 +10,7 @@ import {
   BUY_FAIL
 } from "./types";
 import { tokenConfig } from "./authActions";
+import { refreshUserData } from "./userActions";
 import { returnErrors } from "./errorActions";
 import { loadUser } from "./authActions";
 import store from "../store";
@@ -58,6 +59,7 @@ export const addStock = stock => (dispatch, getState) => {
 };
 
 export const buyStock = stock => (dispatch, getState) => {
+  const state = store.getState();
   axios
     .post("/api/stocks/buy", stock, tokenConfig(getState))
     .then(res =>
@@ -66,6 +68,7 @@ export const buyStock = stock => (dispatch, getState) => {
         payload: res.data
       })
     )
+    .then(() => dispatch(refreshUserData(state.auth.user)))
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );
@@ -95,8 +98,9 @@ export const searchStock = stock => (dispatch, getState) => {
   };
 };
 
-// return returns to reducer
+// return to reducer
 export const deleteStock = stock => (dispatch, getState) => {
+  const state = store.getState();
   axios
     .post(`/api/stocks/delete`, stock, tokenConfig(getState))
     .then(res =>
@@ -105,6 +109,7 @@ export const deleteStock = stock => (dispatch, getState) => {
         payload: res.data
       })
     )
+    .then(() => dispatch(refreshUserData(state.auth.user)))
     .catch(err =>
       dispatch(returnErrors(err.response.data, err.response.status))
     );

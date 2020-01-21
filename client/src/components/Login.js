@@ -49,7 +49,7 @@ class Login extends Component {
   };
 
   onSubmit = e => {
-    console.log("logging in...");
+    //console.log("logging in...");
     this.props.clearErrors();
     e.preventDefault();
 
@@ -65,7 +65,7 @@ class Login extends Component {
   };
 
   render() {
-    console.log("Login component rendered");
+    //console.log("Login component rendered");
     if (this.props.isAuthenticated === true) {
       return <Redirect push to="/" />;
     }

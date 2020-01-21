@@ -34,14 +34,11 @@ class NavBar extends Component {
     user: PropTypes.object
   };
 
-  componentDidMount() {
-    this.props.refreshUserData(this.props.auth.user);
-  }
-
   render() {
     // this includes all the state values
     const { isAuthenticated } = this.props.auth;
     const { user } = this.props.user;
+    const { balance } = this.props.user;
     const userLinks = (
       <Fragment>
         <Nav>
@@ -61,6 +58,11 @@ class NavBar extends Component {
         <Nav>
           <Nav.Link as={Link} to="/contact">
             <span className="mainSiteNavBarLink navbar-text mr-3">Contact</span>
+          </Nav.Link>
+        </Nav>
+        <Nav>
+          <Nav.Link as={Link} to="/account">
+            <span className="mainSiteNavBarLink navbar-text mr-3">Account</span>
           </Nav.Link>
         </Nav>
         <Nav>
@@ -102,7 +104,15 @@ class NavBar extends Component {
           </Link>
           <Nav className="mr-auto"></Nav>
           <Nav className="hide-on-mobile">
-            {user ? "Balance: " + user.balance : ""}
+            <span className="bold-text">
+              {user
+                ? "Balance: " +
+                  user.balance.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD"
+                  })
+                : ""}
+            </span>
           </Nav>
           <Nav className="navbar-desktop-links hide-on-mobile">
             {isAuthenticated ? userLinks : guestLinks}
@@ -118,7 +128,8 @@ const mapStateToProps = state => ({
   auth: state.auth,
   error: state.error,
   stock: state.stock,
-  user: state.user
+  user: state.user,
+  balance: state.user.balance
 });
 
 export default connect(mapStateToProps, { refreshUserData })(NavBar);

@@ -28,12 +28,10 @@ mapStateToProps we want to map state into component property, so we can always a
     isAuthenticated: PropTypes.bool,
     auth: PropTypes.object.isRequired,
     error: PropTypes.object.isRequired,
-    success: PropTypes.object
+    success: PropTypes.object,
+    user: PropTypes.object
   };
 
-  componentDidMount() {
-    console.log(this.props.auth.user);
-  }
   // call api, or making action request, is done as component mounts
 
   render() {
@@ -72,7 +70,8 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
   auth: state.auth,
   error: state.error,
-  success: state.success
+  success: state.success,
+  user: state.user
 });
 
 // all actions used in component go in second argument after mapStateToProps

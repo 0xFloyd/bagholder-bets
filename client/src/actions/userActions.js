@@ -13,7 +13,7 @@ export const refreshUserData = user => dispatch => {
     .then(res =>
       dispatch({
         type: REFRESH_USER_DATA,
-        payload: res.data //res.data should be the whole response. the token, and the user object
+        payload: res.data //
       })
     )
     //call error action to get errors if there are some. returnErrors takes in parameters, then returns object with errors

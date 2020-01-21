@@ -104,6 +104,11 @@ td {
   color: rgb(33, 206, 153) !important;
 }
 
+.bold-text {
+  font-weight: bold;
+  padding-right: 20px;
+}
+
 /* // Extra small devices (portrait phones, less than 576px) */
 @media (min-width: 576px) {
   .wsbLogo {
