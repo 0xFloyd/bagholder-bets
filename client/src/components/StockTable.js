@@ -80,6 +80,7 @@ mapStateToProps we want to map state into component property, so we can always a
   };
 
   onDeleteClick = async stock => {
+    this.handleCloseModal();
     this.props.startLoading();
     try {
       const searchStock = await fetch(
@@ -166,12 +167,13 @@ mapStateToProps we want to map state into component property, so we can always a
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="onRequestClose Example"
-          onRequestClose={this.handleCloseModal}
+          onRequestClose={this.handleCloseModal.bind(this)}
           style={customStyles}
         >
           <p>
             Are you sure you want to sell {this.state.activeItem.quantity}{" "}
-            share(s) of {this.state.activeItem.ticker}?
+            share(s) of {this.state.activeItem.ticker} at the current market
+            price?
           </p>
           <Button
             variant="danger"
