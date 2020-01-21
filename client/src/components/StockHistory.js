@@ -71,7 +71,8 @@ const mapStateToProps = state => ({
   auth: state.auth,
   error: state.error,
   success: state.success,
-  user: state.user
+  user: state.user,
+  history: state.user.history
 });
 
 // all actions used in component go in second argument after mapStateToProps

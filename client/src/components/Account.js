@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import NavBar from "./NavBar";
 import { Col, Row } from "react-bootstrap";
+import { refreshUserData } from "../actions/userActions";
 
 class Account extends Component {
   state = {
@@ -25,6 +26,10 @@ class Account extends Component {
     isLoading: PropTypes.bool,
     user: PropTypes.object
   };
+
+  componentDidMount() {
+    this.props.refreshUserData(this.props.auth.user);
+  }
 
   render() {
     // this includes all the state values
@@ -51,4 +56,4 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps)(Account);
+export default connect(mapStateToProps, { refreshUserData })(Account);

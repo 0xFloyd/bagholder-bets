@@ -16,20 +16,51 @@ import { connect } from "react-redux";
 import { buyStock } from "../actions/stockActions";
 import { refreshUserData } from "../actions/userActions";
 import NavBar from "./NavBar";
+import ReactModal from "react-modal";
 var numeral = require("numeral");
 
+ReactModal.setAppElement("#root");
+
+const customStyles = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(255, 255, 255, 0.25)"
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)"
+  }
+};
+
 class Search extends Component {
-  state = {
-    stock: null,
-    data: "",
-    ticker: "",
-    price: "",
-    percentChange: "",
-    ytdChange: "",
-    high: "",
-    low: "",
-    quantity: ""
-  };
+  constructor() {
+    super();
+    this.state = {
+      confirmSell: false,
+      showModal: false,
+      activeItem: "",
+      stock: null,
+      data: "",
+      ticker: "",
+      price: "",
+      percentChange: "",
+      ytdChange: "",
+      high: "",
+      low: "",
+      quantity: ""
+    };
+
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
 
   static propTypes = {
     auth: PropTypes.object.isRequired,
@@ -43,6 +74,17 @@ class Search extends Component {
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  handleOpenModal = e => {
+    e.preventDefault();
+    console.log(e);
+    let quantity = e.target.elements.quantity.value;
+    this.setState({ showModal: true, quantity: quantity });
+  };
+
+  handleCloseModal() {
+    this.setState({ showModal: false });
+  }
 
   onSubmit = async e => {
     //this.props.clearErrors();
@@ -74,21 +116,22 @@ class Search extends Component {
     }
   };
 
-  buyStockSubmit = e => {
+  buyStockSubmit = () => {
     //this.props.clearErrors();
+    this.handleCloseModal();
     var userBuying = this.props.auth.user;
     var value = "";
     //e.preventDefault();
     console.log("clicked");
-    let quantity = e.target.elements.quantity.value;
+    //let quantity = e.target.elements.quantity.value;
 
     /*
     if (this.props.auth.user._id) {
       userBuying = this.props.auth.user._id;
     } */
 
-    if (quantity && this.state.price) {
-      value = quantity * this.state.price;
+    if (this.state.quantity && this.state.price) {
+      value = this.state.quantity * this.state.price;
     }
 
     const stockPurchase = {
@@ -97,7 +140,7 @@ class Search extends Component {
       ticker: this.state.ticker,
       price: this.state.price,
       value: value,
-      quantity: quantity,
+      quantity: this.state.quantity,
       user: userBuying.id
     };
 
@@ -117,6 +160,7 @@ class Search extends Component {
     });
 
     document.getElementById("stockSearchForm").reset();
+    this.props.history.push("/");
   };
 
   render() {
@@ -180,7 +224,7 @@ class Search extends Component {
                   {this.state.msg ? (
                     <Alert variant="danger">{this.state.msg}</Alert>
                   ) : null}
-                  <Form onSubmit={this.buyStockSubmit}>
+                  <Form onSubmit={this.handleOpenModal.bind(this)}>
                     <Row>
                       <Col xs={8} md={{ span: 2, offset: 4 }}>
                         <Form.Control
@@ -201,6 +245,24 @@ class Search extends Component {
             </Container>
           </Col>
         </Row>
+        <ReactModal
+          isOpen={this.state.showModal}
+          contentLabel="onRequestClose Example"
+          onRequestClose={this.handleCloseModal.bind(this)}
+          style={customStyles}
+        >
+          <p>
+            Are you sure you want to buy {" " + this.state.quantity}
+            share(s) of {this.state.ticker} at {this.state.price + " "} each?
+          </p>
+          <Button
+            variant="danger"
+            size="sm"
+            onClick={this.buyStockSubmit.bind(this)}
+          >
+            Confirm sale
+          </Button>
+        </ReactModal>
       </div>
     );
   }
