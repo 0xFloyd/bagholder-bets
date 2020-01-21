@@ -18,3 +18,5 @@ export const REGISTER_FAIL = "REGISTER_FAIL";
 export const GET_ERRORS = "GET_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const REFRESH_USER_DATA = "REFRESH_USER_DATA";
+export const START_LOADING = "START_LOADING";
+export const END_LOADING = "END_LOADING";

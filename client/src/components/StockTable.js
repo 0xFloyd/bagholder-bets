@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getStocks, deleteStock } from "../actions/stockActions";
 import { refreshUserData } from "../actions/userActions";
+import { startLoading, endLoading } from "../actions/loadingActions";
 import { Row, Button, Table, Alert } from "react-bootstrap";
 import PropTypes from "prop-types";
 
@@ -32,7 +33,8 @@ mapStateToProps we want to map state into component property, so we can always a
     auth: PropTypes.object.isRequired,
     error: PropTypes.object.isRequired,
     success: PropTypes.object,
-    user: PropTypes.object
+    user: PropTypes.object,
+    isLoading: PropTypes.bool
   };
 
   // call api, or making action request, is done as component mounts
@@ -48,6 +50,7 @@ mapStateToProps we want to map state into component property, so we can always a
   };
 
   onDeleteClick = async stock => {
+    this.props.startLoading();
     try {
       const searchStock = await fetch(
         `https://cloud.iexapis.com/v1/stock/${stock.ticker}/quote/2?token=pk_764a7652cfde425785b349da624c23ac`,
@@ -58,6 +61,7 @@ mapStateToProps we want to map state into component property, so we can always a
       const response = await searchStock.json();
       var price = response.latestPrice;
     } catch (error) {
+      this.props.endLoading();
       alert("Couldn't sell stock");
     }
 
@@ -71,6 +75,7 @@ mapStateToProps we want to map state into component property, so we can always a
 
     await this.props.deleteStock(stock);
     await this.props.refreshUserData(this.props.auth.user);
+    this.props.endLoading();
   };
 
   render() {
@@ -80,7 +85,7 @@ mapStateToProps we want to map state into component property, so we can always a
     // this grabs stocks option from stock state (stockReducer)
     const { stocks } = this.props.stock;
     return (
-      <div>
+      <div style={{ opacity: this.props.isLoading ? 0.5 : 1 }}>
         <Row className="mt-4 justify-content-center">
           <h1>Portfolio</h1>
         </Row>
@@ -136,12 +141,15 @@ const mapStateToProps = state => ({
   auth: state.auth,
   error: state.error,
   success: state.success,
-  user: state.user
+  user: state.user,
+  isLoading: state.loading.isLoading
 });
 
 // all actions used in component go in second argument after mapStateToProps
 export default connect(mapStateToProps, {
   getStocks,
   deleteStock,
-  refreshUserData
+  refreshUserData,
+  startLoading,
+  endLoading
 })(StockTable);
