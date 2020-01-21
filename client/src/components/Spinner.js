@@ -14,7 +14,7 @@ class Spinner extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: true
+      loading: false
     };
   }
 
@@ -25,7 +25,6 @@ class Spinner extends React.Component {
         size={50}
         color={"green"}
         //size={"150px"} this also works
-        loading={this.state.loading}
       />
     );
   }

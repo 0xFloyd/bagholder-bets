@@ -6,6 +6,28 @@ import { refreshUserData } from "../actions/userActions";
 import { startLoading, endLoading } from "../actions/loadingActions";
 import { Row, Button, Table, Alert } from "react-bootstrap";
 import PropTypes from "prop-types";
+import ReactModal from "react-modal";
+
+ReactModal.setAppElement("#root");
+
+const customStyles = {
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(255, 255, 255, 0.25)"
+  },
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)"
+  }
+};
 
 class StockTable extends Component {
   // when you bring in action from redux (ex: getStocks), it's store as react prop
@@ -20,10 +42,18 @@ in the second set of parentheses
 
 mapStateToProps we want to map state into component property, so we can always access it from this.props.< whatever >
 */
-  state = {
-    isOpen: false,
-    confirmSell: false
-  };
+
+  constructor() {
+    super();
+    this.state = {
+      confirmSell: false,
+      showModal: false,
+      activeItem: ""
+    };
+
+    //this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
 
   static propTypes = {
     getStocks: PropTypes.func.isRequired,
@@ -78,6 +108,15 @@ mapStateToProps we want to map state into component property, so we can always a
     this.props.endLoading();
   };
 
+  handleOpenModal = item => {
+    console.log(item);
+    this.setState({ showModal: true, activeItem: item });
+  };
+
+  handleCloseModal() {
+    this.setState({ showModal: false, activeItem: "" });
+  }
+
   render() {
     //stock represents entire state store. stocks is array of stocks inside
     //this.props.stock.stocks
@@ -92,7 +131,6 @@ mapStateToProps we want to map state into component property, so we can always a
         {this.state.msg ? (
           <Alert variant="danger">{this.state.msg}</Alert>
         ) : null}
-
         <Table aria-label="simple table">
           <thead>
             <tr>
@@ -113,22 +151,36 @@ mapStateToProps we want to map state into component property, so we can always a
                 <td>{item.quantity}</td>
                 <td className="hide-on-mobile">${Math.round(item.value)}</td>
                 <td>
-                  {this.props.isAuthenticated ? (
-                    <Button
-                      variant="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, item)}
-                    >
-                      Sell
-                    </Button>
-                  ) : (
-                    <p>Please log in</p>
-                  )}
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    onClick={this.handleOpenModal.bind(this, item)}
+                  >
+                    Sell
+                  </Button>
                 </td>
               </tr>
             ))}
           </tbody>
         </Table>
+        <ReactModal
+          isOpen={this.state.showModal}
+          contentLabel="onRequestClose Example"
+          onRequestClose={this.handleCloseModal}
+          style={customStyles}
+        >
+          <p>
+            Are you sure you want to sell {this.state.activeItem.quantity}{" "}
+            share(s) of {this.state.activeItem.ticker}?
+          </p>
+          <Button
+            variant="danger"
+            size="sm"
+            onClick={this.onDeleteClick.bind(this, this.state.activeItem)}
+          >
+            Confirm sale
+          </Button>
+        </ReactModal>
       </div>
     );
   }
