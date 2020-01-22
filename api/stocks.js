@@ -51,15 +51,15 @@ router.post("/buy", authorize, async (req, res) => {
     );
 
     var historyEntry =
-      "Bought " +
+      "Purchased " +
       req.body.quantity +
       " shares of " +
       req.body.ticker +
-      " for " +
+      " for $" +
       req.body.price +
       " each on " +
       moment().format("l") +
-      " for " +
+      " for $" +
       value +
       ".";
     console.log(historyEntry);
@@ -99,11 +99,11 @@ router.post("/delete", authorize, async (req, res) => {
     req.body.quantity +
     " shares of " +
     req.body.ticker +
-    " for " +
+    " for $" +
     req.body.price +
     " each on " +
     moment().format("l") +
-    " for " +
+    " for $" +
     sellValue +
     ".";
 

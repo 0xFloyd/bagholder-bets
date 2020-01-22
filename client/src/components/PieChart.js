@@ -3,12 +3,15 @@ import { PieChart, Pie, Sector, Cell } from "recharts";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 }
-];
+//const COLORS = ["#00C49F", "#FFBB28", "#FF8042", "rgb(33, 206, 153)"];
+
+function randomColor() {
+  var x = Math.floor(Math.random() * 256);
+  var y = Math.floor(Math.random() * 256);
+  var z = Math.floor(Math.random() * 256);
+  var color = "rgb(" + x + "," + y + "," + z + ")";
+  return color;
+}
 
 const renderActiveShape = props => {
   const RADIAN = Math.PI / 180;
@@ -91,23 +94,34 @@ class StockChart extends Component {
   static propTypes = {
     stock: PropTypes.object,
     isAuthenticated: PropTypes.bool,
-    auth: PropTypes.object
+    auth: PropTypes.object,
+    user: PropTypes.object
   };
 
   render() {
+    var { stocks } = this.props.stock;
+    const { user } = this.props.user;
+
+    var newArray = stocks.map(stock => {
+      return { name: stock.ticker, value: Number(stock.value) };
+    });
+    if (user) {
+      newArray.push({ name: "cash", value: user.balance });
+    }
+
     return (
       <div>
-        <PieChart width={800} height={400}>
+        <PieChart width={600} height={300}>
           <Pie
-            activeIndex={this.state.activeIndex}
-            activeShape={renderActiveShape}
-            data={data}
-            cx={300}
-            cy={200}
+            data={newArray}
             innerRadius={60}
             outerRadius={80}
-            fill="#8884d8"
-          />
+            fill="rgb(33, 206, 153)"
+          >
+            {newArray.map((entry, index) => (
+              <Cell fill={randomColor()} />
+            ))}
+          </Pie>
         </PieChart>
       </div>
     );
@@ -117,7 +131,8 @@ class StockChart extends Component {
 const mapStateToProps = state => ({
   stock: state.stock,
   isAuthenticated: state.auth.isAuthenticated,
-  auth: state.auth
+  auth: state.auth,
+  user: state.user
 });
 
 export default connect(mapStateToProps)(StockChart);

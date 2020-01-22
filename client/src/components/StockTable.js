@@ -5,6 +5,7 @@ import { getStocks, deleteStock } from "../actions/stockActions";
 import { refreshUserData } from "../actions/userActions";
 import { startLoading, endLoading } from "../actions/loadingActions";
 import { Row, Button, Table, Alert } from "react-bootstrap";
+import StockChart from "./PieChart";
 import PropTypes from "prop-types";
 import ReactModal from "react-modal";
 
@@ -126,8 +127,11 @@ mapStateToProps we want to map state into component property, so we can always a
     const { stocks } = this.props.stock;
     return (
       <div style={{ opacity: this.props.isLoading ? 0.5 : 1 }}>
-        <Row className="mt-4 justify-content-center">
+        <Row className="mt-4 mb-2 justify-content-center">
           <h1>Portfolio</h1>
+        </Row>
+        <Row className="mb-2 justify-content-center">
+          <StockChart />
         </Row>
         {this.state.msg ? (
           <Alert variant="danger">{this.state.msg}</Alert>
@@ -148,9 +152,23 @@ mapStateToProps we want to map state into component property, so we can always a
               <tr key={item._id}>
                 <td className="hide-on-mobile">{item.stock}</td>
                 <td>{item.ticker}</td>
-                <td>${item.price}</td>
+                <td>
+                  $
+                  {item.price.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    minimumFractionDigits: 2
+                  })}
+                </td>
                 <td>{item.quantity}</td>
-                <td className="hide-on-mobile">${Math.round(item.value)}</td>
+                <td className="hide-on-mobile">
+                  $
+                  {item.value.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "USD",
+                    minimumFractionDigits: 2
+                  })}
+                </td>
                 <td>
                   <Button
                     variant="danger"

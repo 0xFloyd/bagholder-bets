@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { connect } from "react-redux";
 
-import { Row, Alert } from "react-bootstrap";
+import { Row, Alert, Col, Container } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 class StockHistory extends Component {
@@ -42,23 +42,23 @@ mapStateToProps we want to map state into component property, so we can always a
     const { user } = this.props.auth;
     return (
       <div>
-        <Row className="mt-4 justify-content-center">
+        <Row className="mt-4 mb-4 justify-content-center">
           <h1>History</h1>
         </Row>
         {this.state.msg ? (
           <Alert variant="danger">{this.state.msg}</Alert>
         ) : null}
-
-        <Row>
+        <Container>
           {user
             ? user.history.map(item => (
-                <h1>
-                  {item}
-                  <br></br>
-                </h1>
+                <Row className="justify-content-center">
+                  <Col xs={12} lg={12}>
+                    <p className="stock-history-entry">{item}</p>
+                  </Col>
+                </Row>
               ))
             : null}
-        </Row>
+        </Container>
       </div>
     );
   }

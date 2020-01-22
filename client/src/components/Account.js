@@ -39,9 +39,8 @@ class Account extends Component {
     return (
       <div>
         <NavBar />
-        <Row className="justify-content-center">
-          <StockHistory />
-        </Row>
+
+        <StockHistory />
       </div>
     );
   }
