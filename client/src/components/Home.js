@@ -8,6 +8,8 @@ import NavBar from "./NavBar";
 import { Col, Row } from "react-bootstrap";
 import Spinner from "./Spinner";
 import StockChart from "./PieChart";
+import Footer from "./Footer";
+import Footerv2 from "./Footerv2";
 var numeral = require("numeral");
 
 class Home extends Component {
@@ -40,6 +42,8 @@ class Home extends Component {
         <Row className="justify-content-center">
           <StockTable />
         </Row>
+
+        <Footerv2 />
       </div>
     );
   }
