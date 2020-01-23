@@ -87,7 +87,11 @@ class NavBar extends Component {
         <Menu right outerContainerId={"App"}>
           {isAuthenticated ? userLinks : guestLinks}
         </Menu>
-        <Navbar expand="lg" variant="light" className="mainSiteNavBar">
+        <Navbar
+          expand="lg"
+          variant="light"
+          className="paper-shadow-class mainSiteNavBar"
+        >
           <Link to="/">
             <img
               src={logo}

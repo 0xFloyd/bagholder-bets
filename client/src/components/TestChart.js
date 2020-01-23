@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { PieChart, Pie, Sector, Cell, Tooltip, Label } from "recharts";
+import { Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -78,19 +79,8 @@ class TwoLevelPieChart extends Component {
           outerRadius={outerRadius + 10}
           fill={fill}
         />
-        <path
-          d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
-          stroke={fill}
-          fill="none"
-        />
 
-        <text
-          x={ex + (cos >= 0 ? 1 : -1) * 12}
-          y={ey}
-          dy={18}
-          textAnchor={textAnchor}
-          fill="rgb(33, 206, 153)"
-        >
+        <text x={235} y={30} fill="rgb(33, 206, 153)">
           {`${payload.name}: ${payload.value.toLocaleString("en-US", {
             style: "currency",
             currency: "USD"
@@ -123,17 +113,19 @@ class TwoLevelPieChart extends Component {
       newArray.push({ name: "cash", value: user.balance });
     }
     return (
-      <PieChart width={600} height={300}>
-        <Pie
-          activeIndex={this.state.activeIndex}
-          activeShape={this.renderActiveShape}
-          data={newArray}
-          innerRadius={50}
-          outerRadius={80}
-          fill="rgb(33, 206, 153)"
-          onMouseEnter={this.onPieEnter}
-        />
-      </PieChart>
+      <div>
+        <PieChart width={600} height={300}>
+          <Pie
+            activeIndex={this.state.activeIndex}
+            activeShape={this.renderActiveShape}
+            data={newArray}
+            innerRadius={50}
+            outerRadius={80}
+            fill="rgb(33, 206, 153)"
+            onMouseEnter={this.onPieEnter}
+          />
+        </PieChart>
+      </div>
     );
   }
 }

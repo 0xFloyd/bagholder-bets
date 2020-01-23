@@ -4,7 +4,18 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { login } from "../actions/authActions";
 import { clearErrors } from "../actions/errorActions";
-import { Alert, Form, Container, Button, Nav, Row, Col } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fab, faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
+import {
+  Alert,
+  Form,
+  Container,
+  Button,
+  Nav,
+  Row,
+  Col,
+  Navbar
+} from "react-bootstrap";
 import { Redirect } from "react-router-dom";
 
 class Login extends Component {
@@ -75,14 +86,17 @@ class Login extends Component {
           <img src={logo} alt="wsb logo" className="wsbLoginLogo"></img>
         </Row>
         <Row className="justify-content-center mt-4">
-          <h1>Sign in</h1>
+          <h1>Log in</h1>
         </Row>
         {this.state.msg ? (
           <Alert variant="danger">{this.state.msg}</Alert>
         ) : null}
         <Row className="justify-content-center mt-3">
-          <form onSubmit={this.onSubmit}>
-            <Form.Group>
+          <form
+            onSubmit={this.onSubmit}
+            style={{ justifyContent: "center", alignItems: "center" }}
+          >
+            <Form.Group className="justify-content-center">
               <Form.Label className="mb-0">Email Address</Form.Label>
               <Form.Control
                 className="mt-0"
@@ -103,6 +117,7 @@ class Login extends Component {
                 onChange={this.onChange}
               />
             </Form.Group>
+
             <Button
               className="justify-content-center splash-form-button"
               type="submit"
@@ -111,16 +126,44 @@ class Login extends Component {
             </Button>
           </form>
         </Row>
-        <Row className="justify-content-center mt-4">
-          <Nav.Link href="#" className="green-theme-text" variant="body2">
-            Forgot password?
-          </Nav.Link>
-        </Row>
-        <Row className="justify-content-center">
+        <Row className="mt-4 justify-content-center">
           <Nav.Link className="green-theme-text" href="register">
             {"Don't have an account? Sign Up"}
           </Nav.Link>
         </Row>
+        <Navbar
+          className="paper-shadow-class footer-bg justify-content-center"
+          fixed="bottom"
+        >
+          <Nav className="justify-content-around">
+            <Nav.Link
+              className="green-theme-text"
+              href="https://www.linkedin.com/in/ryan-floyd/"
+            >
+              Project by Ryan Floyd
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link
+              className="green-theme-text"
+              href="https://www.linkedin.com/in/ryan-floyd/"
+            >
+              <FontAwesomeIcon icon={faLinkedin} />
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link
+              className="green-theme-text"
+              href="https://github.com/MrRyanFloyd"
+            >
+              <FontAwesomeIcon className="fa-1.5x" icon={faGithub} />
+            </Nav.Link>
+          </Nav>
+
+          <Nav.Link className="green-theme-text" href="https://iexcloud.io">
+            Data provided by IEX Cloud
+          </Nav.Link>
+        </Navbar>
       </Container>
     );
   }
@@ -132,3 +175,11 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { login, clearErrors })(Login);
+
+/* Forgot Password. insert above "Already have an account" 
+ <Row className="justify-content-center mt-4">
+          <Nav.Link href="#" className="green-theme-text" variant="body2">
+            Forgot password?
+          </Nav.Link>
+        </Row>
+*/

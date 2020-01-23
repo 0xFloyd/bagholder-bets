@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getStocks, deleteStock } from "../actions/stockActions";
 import { refreshUserData } from "../actions/userActions";
 import { startLoading, endLoading } from "../actions/loadingActions";
-import { Row, Button, Table, Alert } from "react-bootstrap";
+import { Row, Button, Table, Alert, Col, Container } from "react-bootstrap";
 import StockChart from "./PieChart";
 import PropTypes from "prop-types";
 import ReactModal from "react-modal";
@@ -131,18 +131,22 @@ mapStateToProps we want to map state into component property, so we can always a
     // this grabs stocks option from stock state (stockReducer)
     const { stocks } = this.props.stock;
     return (
-      <div style={{ opacity: this.props.isLoading ? 0.5 : 1 }}>
+      <Container style={{ opacity: this.props.isLoading ? 0.5 : 1 }}>
         <Row className="mt-4 mb-2 justify-content-center">
           <h1>Portfolio</h1>
         </Row>
         <Row className="mb-2 justify-content-center">
-          <StockChart />
+          <TestChart />
         </Row>
         {this.state.msg ? (
           <Alert variant="danger">{this.state.msg}</Alert>
         ) : null}
-        <Table aria-label="simple table">
-          <thead>
+        <Table
+          variant="dark"
+          className="paper-shadow-class stock-table-background"
+          aria-label="simple table"
+        >
+          <thead className="stock-table-header">
             <tr>
               <th className="hide-on-mobile">Stock</th>
               <th>Symbol</th>
@@ -154,7 +158,7 @@ mapStateToProps we want to map state into component property, so we can always a
           </thead>
           <tbody>
             {stocks.map(item => (
-              <tr key={item._id}>
+              <tr className="stock-table-row" key={item._id}>
                 <td className="hide-on-mobile">{item.stock}</td>
                 <td>{item.ticker}</td>
                 <td>
@@ -189,7 +193,6 @@ mapStateToProps we want to map state into component property, so we can always a
             ))}
           </tbody>
         </Table>
-        <TestChart />
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="onRequestClose Example"
@@ -209,7 +212,7 @@ mapStateToProps we want to map state into component property, so we can always a
             Confirm sale
           </Button>
         </ReactModal>
-      </div>
+      </Container>
     );
   }
 }

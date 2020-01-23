@@ -76,7 +76,7 @@ class Register extends Component {
           <img src={logo} alt="wsb logo" className="wsbLoginLogo"></img>
         </Row>
         <Row className="justify-content-center mt-4">
-          <h1>Sign in</h1>
+          <h1>Sign Up</h1>
         </Row>
         {this.state.msg ? (
           <Alert variant="danger">{this.state.msg}</Alert>
@@ -119,13 +119,10 @@ class Register extends Component {
             </Button>
           </form>
         </Row>
-        <Row className="justify-content-center mt-4">
-          <Nav.Link href="#" variant="body2">
-            Forgot password?
+        <Row className="mt-4 justify-content-center">
+          <Nav.Link className="green-theme-text" href="login">
+            {"Already have an account? Log In"}
           </Nav.Link>
-        </Row>
-        <Row className="justify-content-center">
-          <Nav.Link href="login">{"Already have an account? Log In"}</Nav.Link>
         </Row>
       </Container>
     );
@@ -138,3 +135,11 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { register, clearErrors })(Register);
+
+/* Forgot Password. insert above "Already have an account" 
+ <Row className="justify-content-center mt-4">
+          <Nav.Link className="green-theme-text" href="#" variant="body2">
+            Forgot password? 
+          </Nav.Link>
+        </Row>
+*/

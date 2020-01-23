@@ -4,7 +4,7 @@ body {
   padding: 0;
   font-family: "DIN Web", sans-serif;
   overflow-x: hidden;
-  background-color: #373a47;
+  background-color: #282c35;
   color: rgb(33, 206, 153);
 }
 
@@ -41,8 +41,14 @@ body {
 }
 
 .wsbLoginLogo {
-  height: 30% !important;
+  width: 30% !important;
   border-radius: 50px;
+  margin-top: 10% !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.wsbLoginLogo:hover {
+  transform: scale(1.05);
 }
 
 .wsbPhraseLogo {
@@ -77,7 +83,7 @@ body {
 }
 
 .mainSiteNavBarLink:hover {
-  color: rgb(65, 165, 65) !important;
+  color: rgb(50, 250, 185) !important;
 }
 
 .no-spacing {
@@ -92,11 +98,37 @@ body {
 
 .splash-form-button {
   background-color: rgb(33, 206, 153);
+  padding: 8px 16px 8px 16px;
+  border: none;
+  margin-top: 10px;
+}
+
+.splash-form-button:hover {
+  background-color: rgb(50, 250, 185);
+  border: none;
+}
+
+.splash-form-button:focus {
+  background-color: rgb(50, 250, 185) !important;
+  border: none;
+}
+
+.splash-form-button:visited {
+  background-color: rgb(50, 250, 185) !important;
+  border: none;
+}
+
+.splash-form-button:active {
+  background-color: rgb(50, 250, 185) !important;
   border: none;
 }
 
 .green-theme-text {
-  color: rgb(33, 206, 153);
+  color: rgb(33, 206, 153) !important;
+}
+
+.green-theme-text:hover {
+  color: rgb(50, 250, 185) !important;
 }
 
 th,
@@ -111,6 +143,26 @@ td {
 
 .stock-history-entry {
   text-align: center;
+}
+
+.paper-shadow-class {
+  box-shadow: 0 2px 15px 0 rgba(26, 26, 27, 0.637);
+}
+
+.footer-bg {
+  background-color: #282c35;
+}
+
+.stock-table-header {
+  background-color: #282c35 !important;
+}
+
+.stock-table-row {
+  background-color: #282c35 !important;
+}
+
+.stock-table-row:hover {
+  background-color: #282c35a4 !important;
 }
 
 /* // Extra small devices (portrait phones, less than 576px) */
@@ -128,6 +180,10 @@ td {
   .wsbLogo {
     width: 4% !important;
   }
+  .wsbLoginLogo {
+    width: 10% !important;
+    border-radius: 50px;
+  }
 }
 
 /*  Large devices (desktops, 992px and up) */
@@ -136,7 +192,7 @@ td {
     width: 3% !important;
   }
   .wsbLoginLogo {
-    width: 20% !important;
+    width: 10% !important;
     border-radius: 50px;
   }
   .blankButton {
