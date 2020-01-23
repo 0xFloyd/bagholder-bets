@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { PieChart, Pie, Sector, Cell } from "recharts";
+import { PieChart, Pie, Sector, Cell, Tooltip, Label } from "recharts";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -114,14 +114,15 @@ class StockChart extends Component {
         <PieChart width={600} height={300}>
           <Pie
             data={newArray}
-            innerRadius={60}
+            innerRadius={40}
             outerRadius={80}
             fill="rgb(33, 206, 153)"
           >
             {newArray.map((entry, index) => (
-              <Cell fill={randomColor()} />
+              <Cell fill={randomColor()}></Cell>
             ))}
           </Pie>
+          <Tooltip />
         </PieChart>
       </div>
     );

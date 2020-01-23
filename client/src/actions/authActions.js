@@ -1,6 +1,7 @@
 import axios from "axios";
 import { returnErrors } from "./errorActions";
-
+import { refreshUserData } from "./userActions";
+import store from "../store";
 import {
   USER_LOADING,
   USER_LOADED,
@@ -20,13 +21,21 @@ export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
   axios
-    .get("/api/authorize/user", tokenConfig(getState))
+    .post("/api/authorize/user", tokenConfig(getState))
     .then(res =>
       dispatch({
         type: USER_LOADED,
         payload: res.data //res.data should be the whole response. the token, and the user object
       })
     )
+    .then(() => {
+      const state = store.getState();
+      console.log(
+        "state called in .then in loadUser: " + JSON.stringify(state)
+      );
+      dispatch(refreshUserData(state.auth.user));
+    })
+
     //call error action to get errors if there are some. returnErrors takes in parameters, then returns object with errors
     .catch(err => {
       dispatch(returnErrors(err));

@@ -6,7 +6,9 @@ import { tokenConfig } from "./authActions";
 import store from "../store";
 
 export const refreshUserData = user => dispatch => {
-  console.log("userAction refreshUserData called with user value: " + user);
+  console.log(
+    "userAction refreshUserData called with user value: " + JSON.stringify(user)
+  );
   // User loading. dispatch this action, Pass this in before anything to change the state of application to loading
   axios
     .post("/api/user/data", user)

@@ -8,6 +8,8 @@ import { Row, Button, Table, Alert } from "react-bootstrap";
 import StockChart from "./PieChart";
 import PropTypes from "prop-types";
 import ReactModal from "react-modal";
+import NumberFormat from "react-number-format";
+import TestChart from "./TestChart";
 
 ReactModal.setAppElement("#root");
 
@@ -69,9 +71,12 @@ mapStateToProps we want to map state into component property, so we can always a
   };
 
   // call api, or making action request, is done as component mounts
+
   componentDidMount() {
-    this.props.getStocks(this.props.auth.user);
-    this.props.refreshUserData(this.props.auth.user);
+    if (this.props.auth) {
+      this.props.getStocks(this.props.auth.user);
+      this.props.refreshUserData(this.props.auth.user);
+    }
   }
 
   toggle = () => {
@@ -153,20 +158,22 @@ mapStateToProps we want to map state into component property, so we can always a
                 <td className="hide-on-mobile">{item.stock}</td>
                 <td>{item.ticker}</td>
                 <td>
-                  $
-                  {item.price.toLocaleString("en-US", {
+                  {Number(item.price).toLocaleString("en-US", {
                     style: "currency",
-                    currency: "USD",
-                    minimumFractionDigits: 2
+                    currency: "USD"
                   })}
                 </td>
-                <td>{item.quantity}</td>
+                <td>
+                  <NumberFormat
+                    value={item.quantity}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                  ></NumberFormat>
+                </td>
                 <td className="hide-on-mobile">
-                  $
-                  {item.value.toLocaleString("en-US", {
+                  {Number(item.value).toLocaleString("en-US", {
                     style: "currency",
-                    currency: "USD",
-                    minimumFractionDigits: 2
+                    currency: "USD"
                   })}
                 </td>
                 <td>
@@ -182,6 +189,7 @@ mapStateToProps we want to map state into component property, so we can always a
             ))}
           </tbody>
         </Table>
+        <TestChart />
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="onRequestClose Example"

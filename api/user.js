@@ -63,6 +63,9 @@ router.post("/", (req, res) => {
 });
 
 router.post("/data", (req, res) => {
+  console.log(
+    "Req.body.id on api/user/data is: " + JSON.stringify(req.body.id)
+  );
   User.findById(req.body.id) //or change this to just req.body.user   if you map id to user in body
     .then(user => res.json(user))
     .catch(err => res.status(404).json({ success: false }));
