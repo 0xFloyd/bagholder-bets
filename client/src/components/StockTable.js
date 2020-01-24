@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import ReactModal from "react-modal";
 import NumberFormat from "react-number-format";
 import TestChart from "./TestChart";
+import { Link } from "react-router-dom";
 
 ReactModal.setAppElement("#root");
 
@@ -141,58 +142,76 @@ mapStateToProps we want to map state into component property, so we can always a
         {this.state.msg ? (
           <Alert variant="danger">{this.state.msg}</Alert>
         ) : null}
-        <Table
-          variant="dark"
-          className="paper-shadow-class stock-table-background"
-          aria-label="simple table"
-        >
-          <thead className="stock-table-header">
-            <tr>
-              <th className="hide-on-mobile">Stock</th>
-              <th>Symbol</th>
-              <th>Buy Price</th>
-              <th>Quantity</th>
-              <th className="hide-on-mobile">Total</th>
-              <th>Sell</th>
-            </tr>
-          </thead>
-          <tbody>
-            {stocks.map(item => (
-              <tr className="stock-table-row" key={item._id}>
-                <td className="hide-on-mobile">{item.stock}</td>
-                <td>{item.ticker}</td>
-                <td>
-                  {Number(item.price).toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD"
-                  })}
-                </td>
-                <td>
-                  <NumberFormat
-                    value={item.quantity}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                  ></NumberFormat>
-                </td>
-                <td className="hide-on-mobile">
-                  {Number(item.value).toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "USD"
-                  })}
-                </td>
-                <td>
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    onClick={this.handleOpenModal.bind(this, item)}
-                  >
-                    Sell
-                  </Button>
-                </td>
+        {stocks.length ? (
+          <Table
+            variant="dark"
+            className="paper-shadow-class stock-table-background"
+            aria-label="simple table"
+          >
+            <thead className="stock-table-header">
+              <tr>
+                <th className="hide-on-mobile">Stock</th>
+                <th>Symbol</th>
+                <th>Buy Price</th>
+                <th>Quantity</th>
+                <th className="hide-on-mobile">Total</th>
+                <th>Sell</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {stocks.map(item => (
+                <tr className="stock-table-row" key={item._id}>
+                  <td className="hide-on-mobile">{item.stock}</td>
+                  <td>{item.ticker}</td>
+                  <td>
+                    {Number(item.price).toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD"
+                    })}
+                  </td>
+                  <td>
+                    <NumberFormat
+                      value={item.quantity}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                    ></NumberFormat>
+                  </td>
+                  <td className="hide-on-mobile">
+                    {Number(item.value).toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "USD"
+                    })}
+                  </td>
+                  <td>
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      onClick={this.handleOpenModal.bind(this, item)}
+                    >
+                      Sell
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        ) : (
+          <Container>
+            <Row className="justify-content-center">
+              <p>You don't currently own any stocks!</p>
+            </Row>
+            <Row className="justify-content-center">
+              <Link to="/buy">
+                <Button
+                  className="justify-content-center splash-form-button"
+                  type="button"
+                >
+                  Buy Stocks
+                </Button>
+              </Link>
+            </Row>
+          </Container>
+        )}
         <ReactModal
           isOpen={this.state.showModal}
           contentLabel="onRequestClose Example"

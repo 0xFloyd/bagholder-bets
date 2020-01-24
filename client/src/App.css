@@ -54,7 +54,6 @@ body {
 .wsbNavLogo {
   height: 8vh;
   padding: 0px;
-  margin: 0px;
   border-radius: 50px;
 }
 
@@ -193,6 +192,10 @@ td {
   background-color: #282c35a4 !important;
 }
 
+.text-align-center {
+  text-align: center;
+}
+
 /* // Extra small devices (portrait phones, less than 576px) */
 @media (min-width: 576px) {
   .wsbLogo {
@@ -219,6 +222,14 @@ td {
   .wsbLogo {
     width: 3% !important;
   }
+
+  .wsbNavLogo {
+    height: 8vh;
+    padding: 0px;
+    border-radius: 50px;
+    margin-left: 100px;
+  }
+
   .wsbLoginLogo {
     width: 10% !important;
     border-radius: 50px;
@@ -257,6 +268,13 @@ td {
 
   .bm-burger-button {
     display: none;
+  }
+
+  .wsbNavLogo {
+    height: 8vh;
+    padding: 0px;
+    border-radius: 50px;
+    margin-left: 100px;
   }
 }
 

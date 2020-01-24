@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const config = require("config");
 const cors = require("cors");
+var nodemailer = require("nodemailer");
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use("/api/user", require("./api/user"));
 app.use("/api/stocks", require("./api/stocks"));
 app.use("/api/authorize", require("./api/authorize"));
 app.use("/api/iex", require("./api/iex"));
+app.use("/api/email", require("./api/email"));
 
 // serve static assets if in production
 if (process.env.NODE_ENV === "production") {

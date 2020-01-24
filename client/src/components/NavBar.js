@@ -93,19 +93,9 @@ class NavBar extends Component {
           className="paper-shadow-class mainSiteNavBar"
         >
           <Link to="/">
-            <img
-              src={logo}
-              alt="wsb logo"
-              className="hide-on-desktop wsbNavLogo"
-            ></img>
+            <img src={logo} alt="wsb logo" className="wsbNavLogo"></img>
           </Link>
-          <Link to="/">
-            <img
-              src={wsbphrase}
-              alt="wsb logo"
-              className="hide-on-mobile wsbPhraseLogo"
-            ></img>
-          </Link>
+
           <Nav className="mr-auto"></Nav>
           <Nav className="hide-on-mobile">
             <span className="bold-text">
