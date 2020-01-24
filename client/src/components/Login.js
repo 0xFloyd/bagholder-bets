@@ -117,6 +117,7 @@ class Login extends Component {
                 onChange={this.onChange}
               />
             </Form.Group>
+                    <Row className="justify-content-center">
 
             <Button
               className="justify-content-center splash-form-button"
@@ -124,6 +125,7 @@ class Login extends Component {
             >
               Login
             </Button>
+            </Row>
           </form>
         </Row>
         <Row className="mt-4 justify-content-center">

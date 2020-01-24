@@ -4,17 +4,50 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { register } from "../actions/authActions";
 import { clearErrors } from "../actions/errorActions";
-import { Alert, Form, Container, Button, Nav, Row, Col } from "react-bootstrap";
+import { Alert, Form, Container, Button, Nav, Row, Col, Navbar } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fab, faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { Redirect } from "react-router-dom";
 
+
+const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+const validateForm = (errors) => {
+    let valid = true;
+    Object.values(errors).forEach(
+        (val) => val.length > 0 && (valid = false)
+    );
+    return valid;
+}
+
+const countErrors = (errors) => {
+    let count = 0;
+    Object.values(errors).forEach(
+        (val) => val.length > 0 && (count = count + 1)
+    );
+    return count;
+}
+
+
+
 class Register extends Component {
-  state = {
-    name: "",
-    email: "",
-    password: "",
-    msg: null,
-    alertOpen: false
-  };
+    constructor(props) {
+        super(props);
+        this.state = {
+            formValid: false,
+            errorCount: null,
+            msg: null,
+            alertOpen: false,
+            name: "",
+            email: "",
+            password: "",
+            errors: {
+                name: '',
+                email: '',
+                password: '',
+            }
+        };
+    }
+  
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
@@ -22,6 +55,41 @@ class Register extends Component {
     register: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
   };
+
+    
+
+    handleChange = (event) => {
+        event.preventDefault();
+        const { name, value } = event.target;
+        let errors = this.state.errors;
+
+        switch (name) {
+            case 'name':
+                errors.name =
+                    value.length < 2
+                        ? 'Name must be at least 2 characters long'
+                        : '';
+                break;
+            case 'email':
+                errors.email =
+                    validEmailRegex.test(value)
+                        ? ''
+                        : 'Please enter a valid email address';
+                break;
+            case 'password':
+                errors.password =
+                    value.length < 6
+                        ? 'Password must be at least 6 characters long'
+                        : '';
+                break;
+            default:
+                break;
+        }
+
+        this.setState({ errors, [name]: value });
+    }
+
+  
 
   // Lifecylce method for when component updates. takes in previous props as arg
   componentDidUpdate(prevProps) {
@@ -43,11 +111,25 @@ class Register extends Component {
     this.props.clearErrors();
   };
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+    canBeSubmitted = () => {
+        const { name, email, password, errors } = this.state;
+        return (
+            name.length > 0 &&
+            email.length > 0 &&
+            password.length > 0 && errors.name === '' && 
+            errors.email === '' && 
+            errors.password === ''
+        );
+    }
 
   onSubmit = e => {
+    
+    if (!this.canBeSubmitted()) {
+          e.preventDefault();
+          return;
+      }  
+    
+    
     this.props.clearErrors();
     e.preventDefault();
 
@@ -69,6 +151,8 @@ class Register extends Component {
     if (this.props.isAuthenticated === true) {
       return <Redirect to="/" />;
     }
+      const isEnabled = this.canBeSubmitted();
+      const { errors, formValid } = this.state;
     const { classes } = this.props;
     return (
       <Container>
@@ -90,8 +174,10 @@ class Register extends Component {
                 id="name"
                 label="name"
                 name="name"
-                onChange={this.onChange}
+                            onChange={this.handleChange}
               />
+                        {errors.name.length > 0 &&
+                            <span className='error'>{errors.name}</span>}
             </Form.Group>
             <Form.Group>
               <Form.Label className="mb-0">Email Address</Form.Label>
@@ -100,8 +186,9 @@ class Register extends Component {
                 id="email"
                 label="Email Address"
                 name="email"
-                onChange={this.onChange}
-              />
+                            onChange={this.handleChange}
+                        /> {errors.email.length > 0 &&
+                            <span className='error'>{errors.email}</span>}
             </Form.Group>
             <Form.Group>
               <Form.Label className="mb-0">Password</Form.Label>
@@ -111,12 +198,15 @@ class Register extends Component {
                 label="Password"
                 type="password"
                 id="password"
-                onChange={this.onChange}
-              />
+                            onChange={this.handleChange}
+                        />  {errors.password.length > 0 &&
+                            <span className='error'>{errors.password}</span>}
             </Form.Group>
-            <Button className="splash-form-button" type="submit">
+                    <Row className="justify-content-center">
+                    <Button disabled={!isEnabled} className="splash-form-button" type="submit">
               Login
             </Button>
+            </Row>
           </form>
         </Row>
         <Row className="mt-4 justify-content-center">
@@ -124,6 +214,39 @@ class Register extends Component {
             {"Already have an account? Log In"}
           </Nav.Link>
         </Row>
+            <Navbar
+                className="paper-shadow-class footer-bg justify-content-center"
+                fixed="bottom"
+            >
+                <Nav className="justify-content-around">
+                    <Nav.Link
+                        className="green-theme-text"
+                        href="https://www.linkedin.com/in/ryan-floyd/"
+                    >
+                        Project by Ryan Floyd
+            </Nav.Link>
+                </Nav>
+                <Nav>
+                    <Nav.Link
+                        className="green-theme-text"
+                        href="https://www.linkedin.com/in/ryan-floyd/"
+                    >
+                        <FontAwesomeIcon icon={faLinkedin} />
+                    </Nav.Link>
+                </Nav>
+                <Nav>
+                    <Nav.Link
+                        className="green-theme-text"
+                        href="https://github.com/MrRyanFloyd"
+                    >
+                        <FontAwesomeIcon className="fa-1.5x" icon={faGithub} />
+                    </Nav.Link>
+                </Nav>
+
+                <Nav.Link className="green-theme-text" href="https://iexcloud.io">
+                    Data provided by IEX Cloud
+          </Nav.Link>
+            </Navbar>
       </Container>
     );
   }

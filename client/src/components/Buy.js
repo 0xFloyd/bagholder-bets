@@ -55,9 +55,9 @@ class Search extends Component {
       ytdChange: "",
       high: "",
       low: "",
-      quantity: ""
+        quantity: '',
     };
-
+      this.onQuantityChange = this.onQuantityChange.bind(this)
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
@@ -75,6 +75,13 @@ class Search extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+    onQuantityChange = e => {
+        const re = /^[0-9\b]+$/;
+        if (e.target.value === '' || re.test(e.target.value)) {
+            this.setState({ quantity: e.target.value })
+        }
+    }
+
   handleOpenModal = e => {
     e.preventDefault();
     console.log(e);
@@ -85,6 +92,8 @@ class Search extends Component {
   handleCloseModal() {
     this.setState({ showModal: false });
   }
+
+
 
   onSubmit = async e => {
     //this.props.clearErrors();
@@ -164,6 +173,7 @@ class Search extends Component {
   };
 
   render() {
+      
     return (
       <div>
         <NavBar />
@@ -229,12 +239,13 @@ class Search extends Component {
                       <Col xs={8} md={{ span: 2, offset: 4 }}>
                         <Form.Control
                           name="quantity"
-                          onChange={this.onChange}
+                                                onChange={this.onQuantityChange}
                           placeholder="quantity"
+                                               value={this.state.quantity}
                         />
                       </Col>
                       <Col xs={4} md={{ span: 3 }}>
-                        <Button className="stock-search-button" type="submit">
+                                            <Button className="stock-search-button" type="submit">
                           Buy
                         </Button>
                       </Col>

@@ -4,25 +4,38 @@ import { Row, Form, Button, Col, Container } from "react-bootstrap";
 const axios = require("axios");
 
 export default class Contact extends Component {
-  handleSubmit(e) {
+  
+    handleSubmit(e) {
     e.preventDefault();
+    
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const message = document.getElementById("message").value;
+    const messageButton = document.getElementById("messageSubmitButton");
+
+    var oldValue = messageButton.value;
+
+      messageButton.setAttribute("hidden", true);
+    messageButton.value = 'sending...';
+
     axios({
       method: "POST",
       url: "http://localhost:5000/api/email",
       data: {
         name: name,
         email: email,
-        messsage: message
+        message: message
       }
     }).then(response => {
       if (response.data.msg === "success") {
         alert("Message Sent.");
         this.resetForm();
+          messageButton.value = oldValue;
+                messageButton.removeAttribute("hidden");
       } else if (response.data.msg === "fail") {
         alert("Message failed to send.");
+          messageButton.value = oldValue;
+                messageButton.removeAttribute("hidden");
       }
     });
   }
@@ -68,6 +81,7 @@ export default class Contact extends Component {
                 <Button
                   className="justify-content-center splash-form-button"
                   type="submit"
+                  id="messageSubmitButton"
                 >
                   Send
                 </Button>
