@@ -51,9 +51,9 @@ mapStateToProps we want to map state into component property, so we can always a
         <Container>
           {user
             ? user.history.map(item => (
-                <Row className="justify-content-center">
-                  <Col xs={12} lg={12}>
-                    <p className="stock-history-entry">{item}</p>
+                <Row className="mt-2 mb-2 justify-content-center">
+                  <Col className="paper-shadow-class mt-2 mb-2" xs={12} lg={12}>
+                    <p className="stock-history-entry text-align-vertical text-align-center">{item}</p>
                   </Col>
                 </Row>
               ))
