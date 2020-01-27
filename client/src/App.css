@@ -86,9 +86,28 @@ body {
 }
 
 .stock-search-button:hover {
-  border-radius: 3px;
-  background-color: rgb(113, 199, 116);
-  border: 0px solid rgb(76, 175, 80);
+  background-color: rgb(50, 250, 185);
+  border: none;
+}
+
+.stock-search-button:focus {
+  background-color: rgb(50, 250, 185) !important;
+  border: none;
+}
+
+.stock-search-button:visited {
+  background-color: rgb(50, 250, 185) !important;
+  border: none;
+}
+
+.stock-search-button:active {
+  background-color: rgb(50, 250, 185) !important;
+  border: none;
+}
+
+.stock-search-button:disabled {
+  background-color: rgb(50, 250, 185) !important;
+  border: none;
 }
 
 .mainSiteNavBar {
@@ -204,7 +223,7 @@ td {
 }
 
 .text-align-vertical {
-    vertical-align: middle;
+  vertical-align: middle;
 }
 
 /* // Extra small devices (portrait phones, less than 576px) */
@@ -243,7 +262,7 @@ td {
 
   .wsbLoginLogo {
     width: 10% !important;
-     margin-top: 10px;
+    margin-top: 10px;
     border-radius: 50px;
   }
   .blankButton {
@@ -267,7 +286,7 @@ td {
 
   .wsbLoginLogo {
     width: 10% !important;
-     margin-top: 10px;
+    margin-top: 10px;
     border-radius: 50px;
   }
   .blankButton {

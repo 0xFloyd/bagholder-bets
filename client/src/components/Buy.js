@@ -55,9 +55,10 @@ class Search extends Component {
       ytdChange: "",
       high: "",
       low: "",
-        quantity: '',
+      quantity: "",
+      isEnabled: false
     };
-      this.onQuantityChange = this.onQuantityChange.bind(this)
+    this.onQuantityChange = this.onQuantityChange.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
@@ -75,12 +76,12 @@ class Search extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-    onQuantityChange = e => {
-        const re = /^[0-9\b]+$/;
-        if (e.target.value === '' || re.test(e.target.value)) {
-            this.setState({ quantity: e.target.value })
-        }
+  onQuantityChange = e => {
+    const re = /^[0-9\b]+$/;
+    if (e.target.value === "" || re.test(e.target.value)) {
+      this.setState({ quantity: e.target.value, isEnabled: true });
     }
+  };
 
   handleOpenModal = e => {
     e.preventDefault();
@@ -92,8 +93,6 @@ class Search extends Component {
   handleCloseModal() {
     this.setState({ showModal: false });
   }
-
-
 
   onSubmit = async e => {
     //this.props.clearErrors();
@@ -131,7 +130,6 @@ class Search extends Component {
     var userBuying = this.props.auth.user;
     var value = "";
     //e.preventDefault();
-    console.log("clicked");
     //let quantity = e.target.elements.quantity.value;
 
     /*
@@ -165,7 +163,8 @@ class Search extends Component {
       ytdChange: "",
       high: "",
       low: "",
-      quantity: ""
+      quantity: "",
+      isEnabled: true
     });
 
     document.getElementById("stockSearchForm").reset();
@@ -173,7 +172,6 @@ class Search extends Component {
   };
 
   render() {
-      
     return (
       <div>
         <NavBar />
@@ -183,24 +181,28 @@ class Search extends Component {
         <Row className="justify-content-center">
           <Col>
             <Container className="mt-3 mb-3">
-              <Form id="stockSearchForm" onSubmit={this.onSubmit}>
-                <InputGroup className="mt-3 mb-3">
-                  <FormControl
-                    name="stockTicker"
-                    placeholder="stock ticker"
-                    aria-label="stock ticker"
-                    onChange={this.onChange}
-                  />
-                  <InputGroup.Append>
-                    <Button
-                      className="input-group-btn stock-search-button"
-                      type="submit"
-                    >
-                      Search
-                    </Button>
-                  </InputGroup.Append>
-                </InputGroup>
-              </Form>
+              <Row className="justify-content-center">
+                <Col xs={11} md={6}>
+                  <Form id="stockSearchForm" onSubmit={this.onSubmit}>
+                    <InputGroup className="mt-3 mb-3">
+                      <FormControl
+                        name="stockTicker"
+                        placeholder="stock ticker"
+                        aria-label="stock ticker"
+                        onChange={this.onChange}
+                      />
+                      <InputGroup.Append>
+                        <Button
+                          className="input-group-btn stock-search-button"
+                          type="submit"
+                        >
+                          Search
+                        </Button>
+                      </InputGroup.Append>
+                    </InputGroup>
+                  </Form>
+                </Col>
+              </Row>
 
               <Row className="justify-content-center">
                 <Col className="mt-3 mb-3 text-center">
@@ -239,13 +241,17 @@ class Search extends Component {
                       <Col xs={8} md={{ span: 2, offset: 4 }}>
                         <Form.Control
                           name="quantity"
-                                                onChange={this.onQuantityChange}
+                          onChange={this.onQuantityChange}
                           placeholder="quantity"
-                                               value={this.state.quantity}
+                          value={this.state.quantity}
                         />
                       </Col>
                       <Col xs={4} md={{ span: 3 }}>
-                                            <Button className="stock-search-button" type="submit">
+                        <Button
+                          disabled={!this.state.isEnabled}
+                          className="stock-search-button"
+                          type="submit"
+                        >
                           Buy
                         </Button>
                       </Col>
@@ -263,8 +269,13 @@ class Search extends Component {
           style={customStyles}
         >
           <p>
-            Are you sure you want to buy {" " + this.state.quantity}
-            share(s) of {this.state.ticker} at {this.state.price + " "} each?
+            Are you sure you want to buy {" " + this.state.quantity + " "}
+            share(s) of {this.state.ticker} at{" "}
+            {Number(this.state.price).toLocaleString("en-US", {
+              style: "currency",
+              currency: "USD"
+            }) + " "}{" "}
+            each?
           </p>
           <Button
             variant="danger"

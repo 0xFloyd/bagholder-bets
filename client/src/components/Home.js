@@ -10,6 +10,7 @@ import Spinner from "./Spinner";
 import StockChart from "./PieChart";
 import Footer from "./Footer";
 import Footerv2 from "./Footerv2";
+import StockNews from "./StockNews";
 var numeral = require("numeral");
 
 class Home extends Component {
@@ -41,6 +42,9 @@ class Home extends Component {
         <NavBar />
         <Row className="justify-content-center">
           <StockTable />
+        </Row>
+        <Row>
+          <StockNews />
         </Row>
 
         <Footerv2 />
