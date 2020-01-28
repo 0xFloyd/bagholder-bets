@@ -5,7 +5,7 @@ import StockHistory from "./StockHistory";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import NavBar from "./NavBar";
-import { Col, Row, Image, Container } from "react-bootstrap";
+import { Col, Row, Image, Container, Media } from "react-bootstrap";
 import { refreshUserData } from "../actions/userActions";
 
 class StockNews extends Component {
@@ -68,17 +68,30 @@ class StockNews extends Component {
       <Container>
         {this.state.stockNewsArray.length ? (
           <div>
+            <Row className="justify-content-center mb-4 mt-4">
+              <h1>News</h1>
+            </Row>
             {this.state.stockNewsArray.map(item => (
-              <Row className="justify-content-center">
-                <Col xs={6}>
-                  <Image src={item.image} fluid rounded />
-                </Col>
-                <Col xs={6}>
-                  <a href={item.url}>{item.headline}</a>
-                  <p>Source: {item.source}</p>
-                  <p>Tags: {item.related}</p>
-                </Col>
-              </Row>
+              <div>
+                <Row className="pr-4 pl-4">
+                  <Media>
+                    <img
+                      className="stock-news-image align-self-center"
+                      src={item.image}
+                      rounded
+                    />
+                    <Media.Body>
+                      {item.source + " "} #{item.related}
+                      <a
+                        className="stock-news-article-title text-align-justify"
+                        href={item.url}
+                      >
+                        {item.headline}
+                      </a>
+                    </Media.Body>
+                  </Media>
+                </Row>
+              </div>
             ))}
           </div>
         ) : (

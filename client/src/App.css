@@ -226,6 +226,12 @@ td {
   vertical-align: middle;
 }
 
+.stock-news-image {
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle !important;
+}
+
 /* // Extra small devices (portrait phones, less than 576px) */
 @media (min-width: 576px) {
   .wsbLogo {
@@ -276,6 +282,20 @@ td {
   .bm-burger-button {
     display: none;
   }
+
+  .stock-news-image {
+    height: auto;
+    max-width: 50%;
+  }
+
+  .stock-news-article-title {
+    color: rgb(33, 206, 153) !important;
+  }
+
+  .stock-news-article-title:hover {
+    color: rgb(50, 250, 185) !important;
+    text-decoration: underline !important;
+  }
 }
 
 /*  Extra large devices (large desktops, 1200px and up) */
@@ -307,11 +327,37 @@ td {
     border-radius: 50px;
     margin-left: 100px;
   }
+
+  .stock-news-image {
+    height: auto;
+    max-width: 50%;
+  }
+
+  .stock-news-article-title {
+    color: rgb(33, 206, 153) !important;
+  }
+
+  .stock-news-article-title:hover {
+    color: rgb(50, 250, 185) !important;
+    text-decoration: underline !important;
+  }
 }
 
 @media (max-width: 767px) {
   .hide-on-mobile {
     display: none;
+  }
+
+  .stock-news-article-title {
+    color: rgb(33, 206, 153) !important;
+    text-align: justify !important;
+    font-size: 0.9rem !important;
+  }
+
+  .stock-news-article-title:hover {
+    color: rgb(50, 250, 185) !important;
+    text-decoration: underline !important;
+    text-align: justify !important;
   }
 }
 
