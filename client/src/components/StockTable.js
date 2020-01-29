@@ -143,58 +143,60 @@ mapStateToProps we want to map state into component property, so we can always a
           <Alert variant="danger">{this.state.msg}</Alert>
         ) : null}
         {stocks.length ? (
-          <Table
-            variant="dark"
-            className="paper-shadow-class stock-table-background"
-            aria-label="simple table"
-          >
-            <thead className="stock-table-header">
-              <tr>
-                <th className="hide-on-mobile">Stock</th>
-                <th>Symbol</th>
-                <th>Buy Price</th>
-                <th>Quantity</th>
-                <th className="hide-on-mobile">Total</th>
-                <th>Sell</th>
-              </tr>
-            </thead>
-            <tbody>
-              {stocks.map(item => (
-                <tr className="stock-table-row" key={item._id}>
-                  <td className="hide-on-mobile">{item.stock}</td>
-                  <td>{item.ticker}</td>
-                  <td>
-                    {Number(item.price).toLocaleString("en-US", {
-                      style: "currency",
-                      currency: "USD"
-                    })}
-                  </td>
-                  <td>
-                    <NumberFormat
-                      value={item.quantity}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                    ></NumberFormat>
-                  </td>
-                  <td className="hide-on-mobile">
-                    {Number(item.value).toLocaleString("en-US", {
-                      style: "currency",
-                      currency: "USD"
-                    })}
-                  </td>
-                  <td>
-                    <Button
-                      variant="danger"
-                      size="sm"
-                      onClick={this.handleOpenModal.bind(this, item)}
-                    >
-                      Sell
-                    </Button>
-                  </td>
+          <Container>
+            <Table
+              variant="dark"
+              className="paper-shadow-class stock-table-background"
+              aria-label="simple table"
+            >
+              <thead className="stock-table-header">
+                <tr>
+                  <th className="hide-on-mobile">Stock</th>
+                  <th>Symbol</th>
+                  <th>Buy Price</th>
+                  <th>Quantity</th>
+                  <th className="hide-on-mobile">Total</th>
+                  <th>Sell</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
+              </thead>
+              <tbody>
+                {stocks.map(item => (
+                  <tr className="stock-table-row" key={item._id}>
+                    <td className="hide-on-mobile">{item.stock}</td>
+                    <td>{item.ticker}</td>
+                    <td>
+                      {Number(item.price).toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD"
+                      })}
+                    </td>
+                    <td>
+                      <NumberFormat
+                        value={item.quantity}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                      ></NumberFormat>
+                    </td>
+                    <td className="hide-on-mobile">
+                      {Number(item.value).toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD"
+                      })}
+                    </td>
+                    <td>
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={this.handleOpenModal.bind(this, item)}
+                      >
+                        Sell
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Container>
         ) : (
           <Container>
             <Row className="justify-content-center">
