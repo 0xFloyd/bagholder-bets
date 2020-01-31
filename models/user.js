@@ -11,8 +11,8 @@ const UserSchema = new mongoose.Schema({
   },
 
   date: {
-    type: Date,
-    default: Date.now
+    type: String,
+    default: moment().format("MMMM Do YYYY, h:mm:ss a")
   },
 
   history: [

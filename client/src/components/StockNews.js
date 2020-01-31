@@ -55,7 +55,7 @@ class StockNews extends Component {
   };
 
   componentDidMount() {
-    var shuffledStocks = shuffleArray(stockTickerList).slice(0, 5);
+    var shuffledStocks = shuffleArray(stockTickerList).slice(0, 1);
 
     this.fetchNews(shuffledStocks);
   }

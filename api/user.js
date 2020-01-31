@@ -51,7 +51,8 @@ router.post("/", (req, res) => {
                   name: user.name,
                   email: user.email,
                   balance: user.balance,
-                  history: user.history
+                  history: user.history,
+                  date: user.date
                 }
               });
             }

@@ -43,7 +43,25 @@ mapStateToProps we want to map state into component property, so we can always a
     return (
       <div>
         <Row className="mt-4 mb-4 justify-content-center">
-          <h1>History</h1>
+          <h1>Account</h1>
+        </Row>
+        <Container>
+          {user ? (
+            <div>
+              <Row className="mt-4 mb-4 justify-content-center">
+                <p>Name: {user.name}</p>
+              </Row>
+              <Row className="mt-4 mb-4 justify-content-center">
+                <p>Email: {user.email}</p>
+              </Row>
+              <Row className="mt-4 mb-4 justify-content-center">
+                {user.date ? <p>Account created on {user.date}</p> : null}
+              </Row>
+            </div>
+          ) : null}
+        </Container>
+        <Row className="mt-4 mb-4 justify-content-center">
+          <h3>History</h3>
         </Row>
         {this.state.msg ? (
           <Alert variant="danger">{this.state.msg}</Alert>
@@ -53,7 +71,9 @@ mapStateToProps we want to map state into component property, so we can always a
             ? user.history.map(item => (
                 <Row className="mt-2 mb-2 justify-content-center">
                   <Col className="paper-shadow-class mt-2 mb-2" xs={12} lg={12}>
-                    <p className="stock-history-entry text-align-vertical text-align-center">{item}</p>
+                    <p className="stock-history-entry text-align-vertical text-align-center">
+                      {item}
+                    </p>
                   </Col>
                 </Row>
               ))
