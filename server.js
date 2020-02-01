@@ -7,7 +7,7 @@ const cors = require("cors");
 var nodemailer = require("nodemailer");
 
 const app = express();
-
+// huh
 app.use(cors());
 app.use(express.json());
 
