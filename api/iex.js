@@ -1,3 +1,4 @@
+require("dotenv").config();
 const axios = require("axios");
 const express = require("express");
 const router = express.Router();
@@ -9,7 +10,7 @@ const Stock = require("../models/stock");
 router.get("/", (req, res) => {
   const data = axios
     .get(
-      `https://cloud.iexapis.com/v1/stock/AAPL/quote/2?token=${config.iexToken}`
+      `https://cloud.iexapis.com/v1/stock/AAPL/quote/5?token=${process.env.iexToken}`
     )
     .then(res => {
       console.log(res.data);

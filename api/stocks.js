@@ -60,7 +60,10 @@ router.post("/buy", authorize, async (req, res) => {
       " each on " +
       moment().format("l") +
       " for $" +
-      value +
+      value.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD"
+      }) +
       ".";
     console.log(historyEntry);
     await User.updateOne(

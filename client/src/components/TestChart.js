@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { PieChart, Pie, Sector, Cell, Tooltip, Label } from "recharts";
-import { Container } from "react-bootstrap";
+import { PieChart, Pie, Sector } from "recharts";
+
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -11,13 +11,6 @@ function randomColor() {
   var color = "rgb(" + x + "," + y + "," + z + ")";
   return color;
 }
-
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 }
-];
 
 class TwoLevelPieChart extends Component {
   state = {
@@ -42,9 +35,7 @@ class TwoLevelPieChart extends Component {
       startAngle,
       endAngle,
       fill,
-      payload,
-      percent,
-      value
+      payload
     } = props;
     const sin = Math.sin(-RADIAN * midAngle);
     const cos = Math.cos(-RADIAN * midAngle);
@@ -54,7 +45,6 @@ class TwoLevelPieChart extends Component {
     const my = cy + (outerRadius + 30) * sin;
     const ex = mx + (cos >= 0 ? 1 : -1) * 22;
     const ey = my;
-    const textAnchor = cos >= 0 ? "start" : "end";
 
     return (
       <g>

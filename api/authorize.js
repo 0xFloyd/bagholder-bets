@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
@@ -39,7 +40,7 @@ router.post("/", (req, res) => {
           id: user.id,
           name: user.name
         },
-        config.get("jwtSecret"),
+        process.env.jwtSecret,
         { expiresIn: 3600 },
         (err, token) => {
           if (err) throw err;

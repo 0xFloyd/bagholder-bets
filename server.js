@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -11,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // get mongoDB login & connect
-const db = config.get("mongoURI");
+const db = process.env.mongoURI;
 mongoose
   .connect(db, {
     useNewUrlParser: true,

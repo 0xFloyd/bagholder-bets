@@ -117,14 +117,13 @@ class Login extends Component {
                 onChange={this.onChange}
               />
             </Form.Group>
-                    <Row className="justify-content-center">
-
-            <Button
-              className="justify-content-center splash-form-button"
-              type="submit"
-            >
-              Login
-            </Button>
+            <Row className="justify-content-center">
+              <Button
+                className="justify-content-center splash-form-button"
+                type="submit"
+              >
+                Login
+              </Button>
             </Row>
           </form>
         </Row>
@@ -140,9 +139,12 @@ class Login extends Component {
           <Nav className="justify-content-around">
             <Nav.Link
               className="green-theme-text"
+              style={{
+                fontSize: "0.8rem"
+              }}
               href="https://www.linkedin.com/in/ryan-floyd/"
             >
-              Project by Ryan Floyd
+              Bagholder's Bets, a Ryan Floyd Project
             </Nav.Link>
           </Nav>
           <Nav>
@@ -161,10 +163,6 @@ class Login extends Component {
               <FontAwesomeIcon className="fa-1.5x" icon={faGithub} />
             </Nav.Link>
           </Nav>
-
-          <Nav.Link className="green-theme-text" href="https://iexcloud.io">
-            Data provided by IEX Cloud
-          </Nav.Link>
         </Navbar>
       </Container>
     );

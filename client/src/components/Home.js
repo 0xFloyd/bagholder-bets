@@ -1,17 +1,13 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import StockTable from "./StockTable";
-import StockModal from "./StockModal";
-import StockHistory from "./StockHistory";
+
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import NavBar from "./NavBar";
-import { Col, Row } from "react-bootstrap";
-import Spinner from "./Spinner";
-import StockChart from "./PieChart";
-import Footer from "./Footer";
+import { Row } from "react-bootstrap";
+
 import Footerv2 from "./Footerv2";
 import StockNews from "./StockNews";
-var numeral = require("numeral");
 
 class Home extends Component {
   state = {

@@ -17,6 +17,9 @@ import { buyStock } from "../actions/stockActions";
 import { refreshUserData } from "../actions/userActions";
 import NavBar from "./NavBar";
 import ReactModal from "react-modal";
+import Footerv2 from "./Footerv2";
+import meow from "../";
+require("dotenv").config();
 var numeral = require("numeral");
 
 ReactModal.setAppElement("#root");
@@ -100,7 +103,7 @@ class Search extends Component {
     let ticker = e.target.elements.stockTicker.value;
     try {
       const searchStock = await fetch(
-        `https://cloud.iexapis.com/v1/stock/${ticker}/quote/2?token=pk_764a7652cfde425785b349da624c23ac`,
+        `https://cloud.iexapis.com/v1/stock/${ticker}/quote/2?token=${process.env.REACT_APP_IEX_TOKEN}`,
         {
           mode: "cors"
         }
@@ -285,6 +288,7 @@ class Search extends Component {
             Confirm sale
           </Button>
         </ReactModal>
+        <Footerv2 />
       </div>
     );
   }

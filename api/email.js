@@ -1,4 +1,6 @@
+require("dotenv").config({ path: "../.env" });
 const express = require("express");
+
 const router = express.Router();
 var nodemailer = require("nodemailer");
 const config = require("config");
@@ -6,8 +8,8 @@ const config = require("config");
 var transport = {
   host: "smtp.gmail.com",
   auth: {
-    user: config.get("email"),
-    pass: config.get("emailPassword")
+    user: process.env.email,
+    pass: process.env.emailPassword
   }
 };
 

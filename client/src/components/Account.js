@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import NavBar from "./NavBar";
 import { Col, Row } from "react-bootstrap";
 import { refreshUserData } from "../actions/userActions";
+import Footerv2 from "./Footerv2";
 
 class Account extends Component {
   state = {
@@ -41,6 +42,7 @@ class Account extends Component {
         <NavBar />
 
         <StockHistory />
+        <Footerv2 />
       </div>
     );
   }

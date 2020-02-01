@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NavBar from "./NavBar";
 import { Row, Form, Button, Col, Container } from "react-bootstrap";
+import Footerv2 from "./Footerv2";
 const axios = require("axios");
 
 export default class Contact extends Component {
@@ -92,6 +93,7 @@ export default class Contact extends Component {
             </Col>
           </Row>
         </Container>
+        <Footerv2 />
       </div>
     );
   }
