@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import NavBar from "./NavBar";
 import { Col, Row, Image, Container, Media } from "react-bootstrap";
 import { refreshUserData } from "../actions/userActions";
+require("dotenv").config();
 
 var stockTickerList = [
   "AAPL",
@@ -64,7 +65,7 @@ class StockNews extends Component {
     try {
       for (let i = 0; i < shuffledStocks.length; i++) {
         var stockNews = await fetch(
-          `https://cloud.iexapis.com/v1/stock/${shuffledStocks[i]}/news/last/1?token=pk_764a7652cfde425785b349da624c23ac`,
+          `https://cloud.iexapis.com/v1/stock/${shuffledStocks[i]}/news/last/5?token=${process.env.REACT_APP_IEX_TOKEN}`,
           {
             mode: "cors"
           }
