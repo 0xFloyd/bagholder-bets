@@ -56,7 +56,7 @@ class StockNews extends Component {
   };
 
   componentDidMount() {
-    var shuffledStocks = shuffleArray(stockTickerList).slice(0, 1);
+    var shuffledStocks = shuffleArray(stockTickerList).slice(0, 5);
 
     this.fetchNews(shuffledStocks);
   }
@@ -65,7 +65,7 @@ class StockNews extends Component {
     try {
       for (let i = 0; i < shuffledStocks.length; i++) {
         var stockNews = await fetch(
-          `https://cloud.iexapis.com/v1/stock/${shuffledStocks[i]}/news/last/5?token=${process.env.REACT_APP_IEX_TOKEN}`,
+          `https://cloud.iexapis.com/v1/stock/${shuffledStocks[i]}/news/last/1?token=${process.env.REACT_APP_IEX_TOKEN}`,
           {
             mode: "cors"
           }
