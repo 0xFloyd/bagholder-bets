@@ -8,6 +8,7 @@ import NavBar from "./NavBar";
 import { Col, Row, Image, Container, Media } from "react-bootstrap";
 import { refreshUserData } from "../actions/userActions";
 require("dotenv").config();
+//test
 
 var stockTickerList = [
   "AAPL",
