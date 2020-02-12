@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import NavBar from "./NavBar";
 import { Col, Row, Image, Container, Media } from "react-bootstrap";
 import { refreshUserData } from "../actions/userActions";
-import logo from "../assets/wsb_logo.png";
+
 require("dotenv").config();
 //test
 
