@@ -58,7 +58,8 @@ body {
 }
 
 .wsbLoginLogo {
-  width: 30% !important;
+  width: 150px;
+  height: auto;
   border-radius: 50px;
   margin-top: 30px;
   transition: all 0.2s ease-in-out;
@@ -248,7 +249,7 @@ td {
 
 .splashImage {
   padding: 60px;
-  max-width: 100%;
+  width: 400px;
   height: auto;
 }
 
@@ -276,10 +277,6 @@ td {
   .wsbLogo {
     width: 4% !important;
   }
-  .wsbLoginLogo {
-    width: 10% !important;
-    border-radius: 50px;
-  }
 }
 
 /*  Large devices (desktops, 992px and up) */
@@ -306,6 +303,8 @@ td {
     max-width: 100%;
     height: auto;
     margin-right: 20%;
+    margin-top: 50px;
+    width: 600px;
   }
 
   .wsbNavLogo {

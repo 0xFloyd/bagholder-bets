@@ -106,7 +106,7 @@ class Splash extends Component {
             </div>
           </Col>
           <Col lg={6}>
-            <Row className="mt justify-content-center">
+            <Row className=" justify-content-center">
               <Image className="splashImage" src={splashImage}></Image>
             </Row>
           </Col>
