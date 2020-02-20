@@ -149,7 +149,7 @@ class Register extends Component {
     const { classes } = this.props;
     return (
       <Container>
-        <Row className="justify-content-center">
+        <Row className="mt-4 justify-content-center">
           <img
             src={logo}
             alt="wsb logo"
