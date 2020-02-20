@@ -248,8 +248,9 @@ td {
 }
 
 .splashImage {
-  padding: 60px;
-  height: 400px;
+  padding: 40px;
+  width: 350px;
+  height: auto;
 }
 
 .splashImageFace {
