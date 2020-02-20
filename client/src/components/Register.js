@@ -150,7 +150,11 @@ class Register extends Component {
     return (
       <Container>
         <Row className="justify-content-center">
-          <img src={logo} alt="wsb logo" className="wsbLoginLogo"></img>
+          <img
+            src={logo}
+            alt="wsb logo"
+            className="paper-shadow-class splashImageFace"
+          ></img>
         </Row>
         <Row className="justify-content-center mt-4">
           <h1>Sign Up</h1>

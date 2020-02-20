@@ -84,7 +84,11 @@ class Login extends Component {
     return (
       <Container>
         <Row className="justify-content-center">
-          <Image src={logo} alt="wsb logo" className="wsbLoginLogo"></Image>
+          <Image
+            src={logo}
+            alt="wsb logo"
+            className="paper-shadow-class splashImageFace"
+          ></Image>
         </Row>
         <Row className="justify-content-center mt-4">
           <h1>Log in</h1>
