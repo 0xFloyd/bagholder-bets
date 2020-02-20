@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Login from "./Login";
+import Splash from "./Splash";
 import Register from "./Register";
 import NotFound from "./NotFound";
 import ProtectedRoute from "./ProtectedRoute";
@@ -10,7 +11,6 @@ import Home from "./Home";
 import Account from "./Account";
 import Contact from "./Contact";
 import Buy from "./Buy";
-import Spinner from "./Spinner";
 
 /*
 class DebugRouter extends BrowserRouter {
@@ -54,6 +54,11 @@ class Main extends Component {
       <div>
         <BrowserRouter>
           <Switch>
+            <Route
+              isAuthenticated={isAuthenticated}
+              path="/welcome"
+              component={Splash}
+            />
             <Route
               isAuthenticated={isAuthenticated}
               path="/login"

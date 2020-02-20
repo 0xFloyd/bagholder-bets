@@ -23,7 +23,7 @@ export default class Footerv2 extends Component {
                 className="green-theme-text"
                 href="https://www.linkedin.com/in/ryan-floyd/"
               >
-                Bagholder's Bets, a Ryan Floyd Project
+                Bagholder Bets by Ryan Floyd
               </Nav.Link>
             </Nav>
             <Nav>
@@ -59,7 +59,7 @@ export default class Footerv2 extends Component {
               style={{ fontSize: "1rem" }}
               href="https://www.linkedin.com/in/ryan-floyd/"
             >
-              Bagholder's Bets, a Ryan Floyd Project
+              Bagholder Bets by Ryan Floyd
             </Nav.Link>
 
             <Nav.Link

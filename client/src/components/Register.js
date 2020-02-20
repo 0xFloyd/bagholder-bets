@@ -228,7 +228,7 @@ class Register extends Component {
               }}
               href="https://www.linkedin.com/in/ryan-floyd/"
             >
-              Bagholder's Bets, a Ryan Floyd Project
+              Bagholder Bets by Ryan Floyd
             </Nav.Link>
           </Nav>
           <Nav>

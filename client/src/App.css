@@ -246,6 +246,21 @@ td {
   vertical-align: middle !important;
 }
 
+.splashImage {
+  padding: 60px;
+  max-width: 100%;
+  height: auto;
+}
+
+.splashImageFace {
+  border-radius: 100%;
+  height: 150px;
+}
+
+.spacer-row {
+  margin-top: 10px;
+}
+
 /* // Extra small devices (portrait phones, less than 576px) */
 @media (min-width: 576px) {
   .wsbLogo {
@@ -271,6 +286,26 @@ td {
 @media (min-width: 992px) {
   .wsbLogo {
     width: 3% !important;
+  }
+
+  .splash-form-left-div {
+    margin-left: 120px;
+    margin-top: 60px;
+  }
+
+  .splashImageFace {
+    border-radius: 100%;
+    height: 200px;
+  }
+
+  .spacer-row {
+    margin-top: 60px;
+  }
+
+  .splashImage {
+    max-width: 100%;
+    height: auto;
+    margin-right: 20%;
   }
 
   .wsbNavLogo {

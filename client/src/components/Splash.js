@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import logo from "../assets/wsb_logo.png";
+import splashImage from "../assets/splash-image.png";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { login } from "../actions/authActions";
@@ -17,9 +18,9 @@ import {
   Navbar,
   Image
 } from "react-bootstrap";
-import { Redirect, NavLink } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
-class Login extends Component {
+class Splash extends Component {
   state = {
     name: "",
     email: "",
@@ -60,79 +61,57 @@ class Login extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = e => {
-    //console.log("logging in...");
-    this.props.clearErrors();
-    e.preventDefault();
-
-    const { email, password } = this.state;
-
-    const userLogin = {
-      email: email,
-      password: password
-    };
-
-    // Try to log in user
-    this.props.login(userLogin);
-  };
-
   render() {
     //console.log("Login component rendered");
     if (this.props.isAuthenticated === true) {
       return <Redirect push to="/" />;
     }
     return (
-      <Container>
+      <div>
+        <Row className="spacer-row"></Row>
         <Row className="justify-content-center">
-          <Image src={logo} alt="wsb logo" className="wsbLoginLogo"></Image>
-        </Row>
-        <Row className="justify-content-center mt-4">
-          <h1>Log in</h1>
-        </Row>
-        {this.state.msg ? (
-          <Alert variant="danger">{this.state.msg}</Alert>
-        ) : null}
-        <Row className="justify-content-center mt-3">
-          <form
-            onSubmit={this.onSubmit}
-            style={{ justifyContent: "center", alignItems: "center" }}
-          >
-            <Form.Group className="justify-content-center">
-              <Form.Label className="mb-0">Email Address</Form.Label>
-              <Form.Control
-                className="mt-0"
-                id="email"
-                label="Email Address"
-                name="email"
-                onChange={this.onChange}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label className="mb-0">Password</Form.Label>
-              <Form.Control
-                className="mt-0"
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                onChange={this.onChange}
-              />
-            </Form.Group>
-            <Row className="justify-content-center">
-              <Button
-                className="justify-content-center splash-form-button"
-                type="submit"
-              >
-                Login
-              </Button>
+          <Col lg={6}>
+            <div className="splash-form-left-div">
+              <Row className="justify-content-center ">
+                <Image
+                  src={logo}
+                  alt="wsb logo"
+                  className="paper-shadow-class splashImageFace"
+                ></Image>
+              </Row>
+              <Row className="mt-4 justify-content-center">
+                <h1>Bagholder Bets</h1>
+              </Row>
+
+              <Row className=" justify-content-center">
+                <h3>It's time to lose money.</h3>
+              </Row>
+
+              <Row className="mt-2 justify-content-center">
+                <Link className="green-theme-text" to="/register">
+                  <Button className="mr-3 splash-form-button">Sign Up</Button>
+                </Link>
+                <Link className="green-theme-text" to="/login">
+                  <Button className="ml-3 splash-form-button">Log In</Button>
+                </Link>
+              </Row>
+              <Row className="mt-4 hide-on-mobile justify-content-center">
+                <Col className="mt-4" xs={6}>
+                  <p className="text-center">
+                    Practice losing OUR money trading stocks before you lose
+                    YOUR money out in the real world!
+                  </p>
+                </Col>
+              </Row>
+            </div>
+          </Col>
+          <Col lg={6}>
+            <Row className="mt justify-content-center">
+              <Image className="splashImage" src={splashImage}></Image>
             </Row>
-          </form>
+          </Col>
         </Row>
-        <Row className="mt-4 justify-content-center">
-          <Nav.Link className="green-theme-text" href="register">
-            {"Don't have an account? Sign Up"}
-          </Nav.Link>
-        </Row>
+
         <Navbar
           className="paper-shadow-class footer-bg justify-content-center"
           fixed="bottom"
@@ -145,7 +124,7 @@ class Login extends Component {
               }}
               href="https://www.linkedin.com/in/ryan-floyd/"
             >
-              Bagholder Bets by Ryan Floyd
+              Bagholder's Bets, a Ryan Floyd Project
             </Nav.Link>
           </Nav>
           <Nav>
@@ -165,7 +144,7 @@ class Login extends Component {
             </Nav.Link>
           </Nav>
         </Navbar>
-      </Container>
+      </div>
     );
   }
 }
@@ -175,7 +154,7 @@ const mapStateToProps = state => ({
   error: state.error
 });
 
-export default connect(mapStateToProps, { login, clearErrors })(Login);
+export default connect(mapStateToProps, { login, clearErrors })(Splash);
 
 /* Forgot Password. insert above "Already have an account" 
  <Row className="justify-content-center mt-4">
