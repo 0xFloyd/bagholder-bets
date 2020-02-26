@@ -1,6 +1,7 @@
 # Bagholder Bets
 
 Bagholder Bets is a MERN Stack Psuedo Stock Trading Platform allowing users to buy and sell stock, analyze technical metrics, and read stock news.
+[Visit Application](http://www.bagholderbets.com)
 
 ![alt text](/client/src/assets/Bagholdersbetslaptop1.png)
 
@@ -16,7 +17,7 @@ One of my favorite apps of all time is [Robinhood](https://robinhood.com/). One 
 
 ## Technology
 
-> <img src="/client/src/assets/js.svg" width="40px"> <img src="/client/src/assets/react.svg" width="40px"> <img src="/client/src/assets/react-bootstrap.png" width="40px"> <img src="/client/src/assets/node.svg" width="40px"> <img src="/client/src/assets/express.svg" width="40px"> <img src="/client/src/assets/mongodb.svg" width="40px"> <img src="/client/src/assets/redux.png" width="40px"> <img src="/client/src/assets/heroku.svg" width="40px"> <img src="/client/src/assets/git.svg" width="40px"> <img src="/client/src/assets/travis-ci.svg" width="40px"> <img src="/client/src/assets/maps.png" width="40px">
+> <img src="/client/src/assets/js.svg" width="40px"> <img src="/client/src/assets/react.svg" width="40px"> <img src="/client/src/assets/react-bootstrap.png" width="40px"> <img src="/client/src/assets/node.svg" width="40px"> <img src="/client/src/assets/express.svg" width="40px"> <img src="/client/src/assets/mongodb.svg" width="40px"> <img src="/client/src/assets/redux.png" width="40px"> <img src="/client/src/assets/heroku.svg" width="40px"> <img src="/client/src/assets/git.svg" width="40px">
 
 - React and JavaScript on the frontend
 - Styled with React-Bootstrap
