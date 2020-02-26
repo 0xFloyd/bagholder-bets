@@ -1,16 +1,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fab, faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
-import {
-  Alert,
-  Form,
-  Container,
-  Button,
-  Nav,
-  Row,
-  Col,
-  Navbar
-} from "react-bootstrap";
+import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { Nav, Row, Col, Navbar } from "react-bootstrap";
 
 export default class Footerv2 extends Component {
   render() {

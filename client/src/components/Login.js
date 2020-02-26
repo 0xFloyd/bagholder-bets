@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { login } from "../actions/authActions";
 import { clearErrors } from "../actions/errorActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fab, faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import {
   Alert,
   Form,
@@ -13,11 +13,10 @@ import {
   Button,
   Nav,
   Row,
-  Col,
   Navbar,
   Image
 } from "react-bootstrap";
-import { Redirect, NavLink } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   state = {
@@ -38,7 +37,7 @@ class Login extends Component {
   // Lifecylce method for when component updates. takes in previous props as arg
   componentDidUpdate(prevProps) {
     // we have access to this in props, you can see in redux tools
-    const { error, isAuthenticated } = this.props;
+    const { error } = this.props;
 
     if (error !== prevProps.error) {
       // check for register error

@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import { getStocks, deleteStock } from "../actions/stockActions";
 import { refreshUserData } from "../actions/userActions";
 import { startLoading, endLoading } from "../actions/loadingActions";
-import { Row, Button, Table, Alert, Col, Container } from "react-bootstrap";
-import StockChart from "./PieChart";
+import { Row, Button, Table, Alert, Container } from "react-bootstrap";
 import PropTypes from "prop-types";
 import ReactModal from "react-modal";
 import NumberFormat from "react-number-format";
@@ -103,7 +102,7 @@ mapStateToProps we want to map state into component property, so we can always a
       alert("Couldn't sell stock");
     }
 
-    var stock = {
+    var stockDelete = {
       user: this.props.auth.user,
       id: stock._id,
       price: price,
@@ -111,7 +110,7 @@ mapStateToProps we want to map state into component property, so we can always a
       ticker: stock.ticker
     };
 
-    await this.props.deleteStock(stock);
+    await this.props.deleteStock(stockDelete);
     await this.props.refreshUserData(this.props.auth.user);
     this.props.endLoading();
   };

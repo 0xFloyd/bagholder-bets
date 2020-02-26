@@ -6,13 +6,11 @@ import {
   DELETE_STOCK,
   STOCKS_LOADING,
   SEARCH_STOCK,
-  BUY_SUCCESS,
-  BUY_FAIL
+  BUY_SUCCESS
 } from "./types";
 import { tokenConfig } from "./authActions";
 import { refreshUserData } from "./userActions";
 import { returnErrors } from "./errorActions";
-import { loadUser } from "./authActions";
 import store from "../store";
 
 // the return is where we're implementing the action.type that's seen in the reducer.

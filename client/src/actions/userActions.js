@@ -2,8 +2,6 @@
 import axios from "axios";
 import { REFRESH_USER_DATA } from "./types";
 import { returnErrors } from "./errorActions";
-import { tokenConfig } from "./authActions";
-import store from "../store";
 
 export const refreshUserData = user => dispatch => {
   // User loading. dispatch this action, Pass this in before anything to change the state of application to loading

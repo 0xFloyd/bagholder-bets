@@ -5,10 +5,7 @@ import Logout from "./Logout";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import logo from "../assets/wsb_logo.png";
-import wsbphrase from "../assets/wsb.png";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import { refreshUserData } from "../actions/userActions";
 //import SideBar from "./SideBar";
 import { slide as Menu } from "react-burger-menu";
@@ -38,7 +35,6 @@ class NavBar extends Component {
     // this includes all the state values
     const { isAuthenticated } = this.props.auth;
     const { user } = this.props.user;
-    const { balance } = this.props.user;
     const userLinks = (
       <Fragment>
         <Nav>

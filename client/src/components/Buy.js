@@ -8,8 +8,7 @@ import {
   Container,
   Table,
   FormControl,
-  InputGroup,
-  FormGroup
+  InputGroup
 } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -18,7 +17,6 @@ import { refreshUserData } from "../actions/userActions";
 import NavBar from "./NavBar";
 import ReactModal from "react-modal";
 import Footerv2 from "./Footerv2";
-import meow from "../";
 require("dotenv").config();
 var numeral = require("numeral");
 

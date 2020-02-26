@@ -59,7 +59,7 @@ router.post("/buy", authorize, async (req, res) => {
       req.body.price +
       " each on " +
       moment().format("l") +
-      " for $" +
+      " for" +
       value.toLocaleString("en-US", {
         style: "currency",
         currency: "USD"

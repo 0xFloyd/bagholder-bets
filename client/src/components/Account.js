@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import StockTable from "./StockTable";
-
 import StockHistory from "./StockHistory";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import NavBar from "./NavBar";
-import { Col, Row } from "react-bootstrap";
 import { refreshUserData } from "../actions/userActions";
 import Footerv2 from "./Footerv2";
 

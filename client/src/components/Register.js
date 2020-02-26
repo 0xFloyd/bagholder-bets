@@ -11,27 +11,15 @@ import {
   Button,
   Nav,
   Row,
-  Col,
   Navbar
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { fab, faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { Redirect } from "react-router-dom";
 
 const validEmailRegex = RegExp(
   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 );
-const validateForm = errors => {
-  let valid = true;
-  Object.values(errors).forEach(val => val.length > 0 && (valid = false));
-  return valid;
-};
-
-const countErrors = errors => {
-  let count = 0;
-  Object.values(errors).forEach(val => val.length > 0 && (count = count + 1));
-  return count;
-};
 
 class Register extends Component {
   constructor(props) {
@@ -145,8 +133,7 @@ class Register extends Component {
       return <Redirect to="/" />;
     }
     const isEnabled = this.canBeSubmitted();
-    const { errors, formValid } = this.state;
-    const { classes } = this.props;
+    const { errors } = this.state;
     return (
       <Container>
         <Row className="mt-4 justify-content-center">
@@ -263,11 +250,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { register, clearErrors })(Register);
-
-/* Forgot Password. insert above "Already have an account" 
- <Row className="justify-content-center mt-4">
-          <Nav.Link className="green-theme-text" href="#" variant="body2">
-            Forgot password? 
-          </Nav.Link>
-        </Row>
-*/

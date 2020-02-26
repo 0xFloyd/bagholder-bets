@@ -40,9 +40,9 @@ mapStateToProps we want to map state into component property, so we can always a
     //this.props.stock.stocks
 
     // this grabs stocks option from state
-    const { isAuthenticated } = this.props.auth;
+
     const { user } = this.props.user;
-    const { balance } = this.props.user;
+
     return (
       <div>
         <Row className="mt-4 mb-4 justify-content-center">

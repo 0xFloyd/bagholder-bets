@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-import StockTable from "./StockTable";
 import logo from "../assets/wsb_logo.png";
-import StockHistory from "./StockHistory";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import NavBar from "./NavBar";
-import { Col, Row, Image, Container, Media } from "react-bootstrap";
-import { refreshUserData } from "../actions/userActions";
+import { Col, Row, Image, Container } from "react-bootstrap";
 
 require("dotenv").config();
 //test
