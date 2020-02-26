@@ -12,7 +12,7 @@ export default class Footerv2 extends Component {
             <Nav className="justify-content-around">
               <Nav.Link
                 className="green-theme-text"
-                href="https://www.linkedin.com/in/ryan-floyd/"
+                href="https://ryanfloyd.io/"
               >
                 Bagholder Bets by Ryan Floyd
               </Nav.Link>

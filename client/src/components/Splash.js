@@ -112,7 +112,7 @@ class Splash extends Component {
               style={{
                 fontSize: "0.8rem"
               }}
-              href="https://www.linkedin.com/in/ryan-floyd/"
+              href="https://ryanfloyd.io/"
             >
               Bagholder Bets, a Ryan Floyd Project
             </Nav.Link>

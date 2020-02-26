@@ -146,7 +146,7 @@ class Login extends Component {
               style={{
                 fontSize: "0.8rem"
               }}
-              href="https://www.linkedin.com/in/ryan-floyd/"
+              href="https://ryanfloyd.io/"
             >
               Bagholder Bets by Ryan Floyd
             </Nav.Link>
