@@ -9,7 +9,7 @@ import NotFound from "./NotFound";
 import ProtectedRoute from "./ProtectedRoute";
 import Home from "./Home";
 import Account from "./Account";
-import Contact from "./Contact";
+//import Contact from "./Contact";
 import Buy from "./Buy";
 
 /*
@@ -75,11 +75,7 @@ class Main extends Component {
               isAuthenticated={isAuthenticated}
               component={Home}
             ></ProtectedRoute>
-            <ProtectedRoute
-              path="/contact"
-              isAuthenticated={isAuthenticated}
-              component={Contact}
-            ></ProtectedRoute>
+
             <ProtectedRoute
               path="/buy"
               isAuthenticated={isAuthenticated}
@@ -107,3 +103,11 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(Main);
+
+/*
+ <ProtectedRoute
+              path="/contact"
+              isAuthenticated={isAuthenticated}
+              component={Contact}
+            ></ProtectedRoute>
+*/

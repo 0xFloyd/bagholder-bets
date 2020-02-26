@@ -51,11 +51,7 @@ class NavBar extends Component {
             </span>
           </Nav.Link>
         </Nav>
-        <Nav>
-          <Nav.Link as={Link} to="/contact">
-            <span className="mainSiteNavBarLink navbar-text mr-3">Contact</span>
-          </Nav.Link>
-        </Nav>
+
         <Nav>
           <Nav.Link as={Link} to="/account">
             <span className="mainSiteNavBarLink navbar-text mr-3">Account</span>
@@ -123,3 +119,12 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { refreshUserData })(NavBar);
+
+/* 
+ <Nav>
+          <Nav.Link as={Link} to="/contact">
+            <span className="mainSiteNavBarLink navbar-text mr-3">Contact</span>
+          </Nav.Link>
+        </Nav>
+
+        */
