@@ -5,6 +5,7 @@ const router = express.Router();
 var nodemailer = require("nodemailer");
 const config = require("config");
 
+/*
 var transport = {
   host: "smtp.gmail.com",
   auth: {
@@ -22,7 +23,7 @@ transporter.verify((error, success) => {
     console.log("Server is ready to take messages");
   }
 });
-
+*/
 router.post("/", (req, res, next) => {
   var name = req.body.name;
   var email = req.body.email;
@@ -36,7 +37,9 @@ router.post("/", (req, res, next) => {
     text: content
   };
 
-  transporter.sendMail(mail, (err, data) => {
+  return res.status(404);
+
+  /*transporter.sendMail(mail, (err, data) => {
     if (err) {
       res.json({
         msg: "fail"
@@ -46,7 +49,7 @@ router.post("/", (req, res, next) => {
         msg: "success"
       });
     }
-  });
+  });*/
 });
 
 module.exports = router;

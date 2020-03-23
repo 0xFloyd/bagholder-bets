@@ -15,7 +15,6 @@ var stockTickerList = [
   "AMD",
   "SNAP",
   "FB",
-  "BABA",
   "TWTR",
   "AMZN",
   "UBER",
@@ -69,6 +68,7 @@ class StockNews extends Component {
           }
         ); //,{ mode: "cors" }
         var response = await stockNews.json();
+        console.log(response);
         var immutArray = this.state.stockNewsArray.concat(response);
         // temporarily show stock metrics so user can decide if they want to buy stock
         this.setState({
@@ -116,7 +116,7 @@ class StockNews extends Component {
                         src={item.image}
                         onError={e => {
                           e.target.onerror = null;
-                          e.target.src = { logo };
+                          e.target.src = logo;
                         }}
                         rounded
                         height={500}
