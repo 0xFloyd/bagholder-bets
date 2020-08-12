@@ -1,7 +1,7 @@
 # Bagholder Bets
 
 Bagholder Bets is a MERN Stack Psuedo Stock Trading Platform allowing users to buy and sell stock, analyze technical metrics, and read stock news.
-[Visit Application](http://www.bagholderbets.com)
+[Visit Application here](https://www.bagholderbets.com/welcome)
 
 ![alt text](/client/src/assets/Bagholdersbetslaptop1.png)
 
